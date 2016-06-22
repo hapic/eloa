@@ -25,4 +25,8 @@
  * @Date : 2016/6/22 19:26
  */
 public class Test {
+
+    public static void main(String[] args) {
+        
+    }
 }
