@@ -1,7 +1,7 @@
 /*
  * Powered By [rapid-framework]
- * Web Site: http://www.eloancn.com
- * By:eloancn
+ * Web Site: #
+ * By:eloa
  * Since 2015 - 2016
  */
 
