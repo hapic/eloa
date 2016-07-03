@@ -3,9 +3,10 @@ package com.el.oa.service.common;
 
 import com.el.oa.common.page.PageList;
 import com.el.oa.common.page.PaginatedList;
-import com.el.oa.domain.base.BaseModel;
+import com.el.oa.common.utils.ReflectUtils;
+import com.el.oa.domain.common.BaseModel;
 import com.el.oa.iservice.common.IBaseService;
-import com.el.oa.mapper.base.BaseMapper;
+import com.el.oa.mapper.common.BaseMapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeansException;

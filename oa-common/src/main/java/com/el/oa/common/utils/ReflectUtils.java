@@ -11,9 +11,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Created by yfzhangsheng on 2015/1/21.
- */
 public class ReflectUtils {
     private final static Logger logger = Logger.getLogger(ReflectUtils.class);
     private final static Map<String, Class> typeMap = new HashMap<String, Class>() {{

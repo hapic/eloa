@@ -3,9 +3,6 @@ package com.el.oa.common.utils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by Administrator on 2015/4/27.
- */
 public class StringUtils extends org.apache.commons.lang3.StringUtils {
     private StringUtils() {
     }

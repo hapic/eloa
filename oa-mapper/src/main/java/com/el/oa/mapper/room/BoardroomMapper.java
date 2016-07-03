@@ -9,7 +9,7 @@ package com.el.oa.mapper.room;
 
 import com.el.oa.domain.room.Boardroom;
 import com.el.oa.domain.room.BoardroomExample;
-import com.el.oa.mapper.base.BaseMapper;
+import com.el.oa.mapper.common.BaseMapper;
 import org.apache.ibatis.annotations.*;
 
 

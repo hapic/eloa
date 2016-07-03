@@ -2,9 +2,6 @@ package com.el.oa.common.utils;
 
 import java.util.UUID;
 
-/**
- * Created by zscome on 15-4-26.
- */
 public class MakeUUID {
     public static void main(String[] args) {
         String[] ss = getUUID(1);

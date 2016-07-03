@@ -1,4 +1,4 @@
-package com.el.oa.mapper.base;
+package com.el.oa.mapper.common;
 
 import org.apache.ibatis.annotations.Param;
 

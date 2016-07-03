@@ -1,4 +1,4 @@
-package com.el.oa.domain.base;
+package com.el.oa.domain.common;
 
 import java.io.Serializable;
 

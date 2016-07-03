@@ -2,9 +2,7 @@ package com.el.oa.common.page;
 
 import java.util.*;
 
-/**
- * Created by zscome on 15-2-12.
- */
+
 public class WrapperArrayList<E> implements RandomAccess, Cloneable, java.io.Serializable, WrapperList<E> {
 
     protected List<E> list;

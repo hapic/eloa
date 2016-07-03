@@ -3,9 +3,6 @@ package com.el.oa.common.utils;
 import java.io.*;
 import java.util.BitSet;
 
-/**
- * Created by Administrator on 2015/5/11.
- */
 public class StringEscapeUtils {
     private static final BitSet ALPHA = new BitSet(256);
     private static final BitSet ALPHANUM;

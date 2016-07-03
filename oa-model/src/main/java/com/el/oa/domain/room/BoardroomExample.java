@@ -7,7 +7,7 @@
 
 package com.el.oa.domain.room;
 
-import com.el.oa.domain.base.BaseModel;
+import com.el.oa.domain.common.BaseModel;
 
 import java.util.ArrayList;
 import java.util.List;

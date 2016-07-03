@@ -3,13 +3,7 @@ package com.el.oa.common.page;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- * Created with IntelliJ IDEA.
- * User: yfzhangsheng
- * Date: 14-2-11
- * Time: 上午10:13
- * To change this template use File | Settings | File Templates.
- */
+
 public class PaginatedList<T extends Serializable> extends WrapperArrayList<T> implements PageList<T> {
 
     private static final long serialVersionUID = -6761941552387789226L;

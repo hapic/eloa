@@ -1,14 +1,13 @@
 package com.el.oa.common.page;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-/**
- * Created by zscome on 15-2-12.
- */
-public interface WrapperList<E> /*extends Iterable<E>*/ {
+
+public interface WrapperList<E> extends Serializable /*extends Iterable<E>*/ {
     Iterator<E> iterator();
 
     Object[] toArray();
