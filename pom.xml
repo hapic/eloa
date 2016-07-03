@@ -15,6 +15,7 @@
         <module>oa-service</module>
         <module>oa-logic</module>
         <module>oa-controller</module>
+        <module>oa-iservice</module>
     </modules>
 
 
