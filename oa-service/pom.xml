@@ -10,6 +10,29 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>oa-service</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.el.oa</groupId>
+            <artifactId>oa-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.el.oa</groupId>
+            <artifactId>oa-model</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.el.oa</groupId>
+            <artifactId>oa-mapper</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.el.oa</groupId>
+            <artifactId>oa-iservice</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
 
 
 </project>
