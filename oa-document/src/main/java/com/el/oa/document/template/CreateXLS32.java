@@ -79,13 +79,21 @@ public class CreateXLS32 {
             wcf3.setBorder(jxl.format.Border.ALL,jxl.format.BorderLineStyle.THIN);//单元格加边框
             String[][] datas={{"6月5日","星期二","张胜","25","0","25"},{"6月5日","星期二","张胜","25","0","25"}};
             int nullDataStart=0;
+            int fanbuSum=0;
+            int chebuSum=0;
             //插入具体的数据
             for(int j=0;j<datas.length;j++){
                 nullDataStart++;
                 for(int i=0;i<6;i++){//6列
                     WritableCell cell=null;
                     if(i==3 || i==4 || i==5){
-                         cell = new Number(i,j+2, Integer.parseInt(datas[j][i]),wcf3);
+                        int i1 = Integer.parseInt(datas[j][i]);
+                        if(i==3){
+                            fanbuSum+=i1;
+                        }else if(i==4){
+                            chebuSum+=i1;
+                        }
+                         cell = new Number(i,j+2,i1,wcf3);
                     }else{
                         cell= new Label(i,j+2,datas[j][i],wcf3);
                     }
@@ -100,9 +108,15 @@ public class CreateXLS32 {
                 }
             }
 
-            String[] hejiDate={"合计"," "," "," "," "," "};
+            String[] hejiDate={"合计"," "," ",fanbuSum+"",chebuSum+"",(fanbuSum+chebuSum)+""};
             for(int i=0;i<6;i++){
-                WritableCell  hejiCel= new Label(i,30,hejiDate[i],wcf3);
+                WritableCell  hejiCel=null;
+                if(i==3 || i==4 || i==5){
+                    hejiCel = new Number(i,30,Integer.parseInt(hejiDate[i]),wcf3);
+                }else {
+                    hejiCel = new Label(i,30,hejiDate[i],wcf3);
+                }
+
                 sheet1.addCell(hejiCel);
             }
 
