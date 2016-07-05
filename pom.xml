@@ -17,6 +17,7 @@
         <module>oa-controller</module>
         <module>oa-iservice</module>
         <module>oa-document</module>
+        <module>oa-fetch</module>
     </modules>
     <properties>
 
@@ -73,6 +74,21 @@
                 <artifactId>jxl</artifactId>
                 <version>2.6.10</version>
             </dependency>
+
+
+            <!--数据爬虫部分-->
+            <dependency>
+                <groupId>us.codecraft</groupId>
+                <artifactId>webmagic-core</artifactId>
+                <version>0.4.2</version>
+            </dependency>
+            <dependency>
+                <groupId>us.codecraft</groupId>
+                <artifactId>webmagic-extension</artifactId>
+                <version>0.4.2</version>
+            </dependency>
+            <!--数据爬虫部分-->
+
 
 
         </dependencies>
