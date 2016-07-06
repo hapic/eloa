@@ -1,8 +1,7 @@
-package com.el.oa.fetch;
+package com.el.oa.common.utils;
 
-import us.codecraft.webmagic.Page;
-import us.codecraft.webmagic.Site;
-import us.codecraft.webmagic.processor.PageProcessor;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -28,36 +27,28 @@ import us.codecraft.webmagic.processor.PageProcessor;
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  *
  * @User : Hapic
- * @Date : 2016/7/5 19:31
+ * @Date : 2016/7/6 19:55
  */
-public class UserInfoFetchPageProcessor implements PageProcessor {
+public class HTMLSpirit {
 
+    public static String delHTMLTag(String htmlStr){
+        String regEx_script="<script[^>]*?>[\\s\\S]*?<\\/script>"; //定义script的正则表达式
+        String regEx_style="<style[^>]*?>[\\s\\S]*?<\\/style>"; //定义style的正则表达式
+        String regEx_html="<[^>]+>"; //定义HTML标签的正则表达式
 
-    private String cookie;
+        Pattern p_script=Pattern.compile(regEx_script,Pattern.CASE_INSENSITIVE);
+        Matcher m_script=p_script.matcher(htmlStr);
+        htmlStr=m_script.replaceAll(""); //过滤script标签
 
-    public UserInfoFetchPageProcessor(String cookie) {
-        this.cookie = cookie;
+        Pattern p_style=Pattern.compile(regEx_style,Pattern.CASE_INSENSITIVE);
+        Matcher m_style=p_style.matcher(htmlStr);
+        htmlStr=m_style.replaceAll(""); //过滤style标签
+
+        Pattern p_html=Pattern.compile(regEx_html,Pattern.CASE_INSENSITIVE);
+        Matcher m_html=p_html.matcher(htmlStr);
+        htmlStr=m_html.replaceAll(""); //过滤html标签
+
+        return htmlStr.trim(); //返回文本字符串
     }
-
-
-    @Override
-    // process是定制爬虫逻辑的核心接口，在这里编写抽取逻辑
-    public void process(Page page) {
-        String s = page.getHtml()
-                .regex("uid=\"\\d*\"")
-                .replace("\"","")
-                .toString().split("=")[1];
-
-        page.putField("uid", Integer.parseInt(s));
-    }
-
-    @Override
-    public Site getSite() {
-        //部分一：抓取网站的相关配置，包括编码、抓取间隔、重试次数等
-        return Site.me().setRetryTimes(3).setSleepTime(1000)
-//                .addHeader("User-Agent","Mozilla/5.0 (Windows NT 6.1; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0")
-                .addHeader("Cookie",cookie);
-    }
-
 
 }
