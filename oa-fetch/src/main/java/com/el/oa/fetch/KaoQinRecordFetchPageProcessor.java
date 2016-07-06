@@ -31,12 +31,12 @@ import us.codecraft.webmagic.processor.PageProcessor;
  * @User : Hapic
  * @Date : 2016/7/5 19:31
  */
-public class KaoQinFetchPageProcessor implements PageProcessor {
+public class KaoQinRecordFetchPageProcessor implements PageProcessor {
 
 
     private String cookie;
 
-    public KaoQinFetchPageProcessor(String cookie) {
+    public KaoQinRecordFetchPageProcessor(String cookie) {
         this.cookie = cookie;
     }
 
@@ -65,7 +65,7 @@ public class KaoQinFetchPageProcessor implements PageProcessor {
    /* public static void main(String[] args) {
 
         String targetUrl="http://124.65.191.70:10000/iclock/staff/transaction/?p=1&t=staff_transaction.html&UserID__id__exact=2304&fromTime=&toTime=";
-        Spider.create(new KaoQinFetchPageProcessor())
+        Spider.create(new KaoQinRecordFetchPageProcessor())
                 //从"https://github.com/code4craft"开始抓
                 .addUrl(targetUrl)
                 //保存结果
