@@ -11,5 +11,18 @@
 
     <artifactId>oa-logic</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.el.oa</groupId>
+            <artifactId>oa-fetch</artifactId>
+            <version>${oa-fetch.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.el.oa</groupId>
+            <artifactId>oa-model</artifactId>
+            <version>${oa-model.version}</version>
+        </dependency>
+
+    </dependencies>
 
 </project>
