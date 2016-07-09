@@ -37,6 +37,10 @@ import java.util.List;
 public class SignRecordDaoImpl extends MongoBaseImpl<SignRecord> implements ISignRecordDao<SignRecord> {
 
 
+    public SignRecordDaoImpl() {
+        super(SignRecord.class);
+    }
+
     public void addRecord(Criteria criteria, List<String> logs, String collectionName) {
         Update upd = new Update();
         upd.pushAll("content", logs.toArray());

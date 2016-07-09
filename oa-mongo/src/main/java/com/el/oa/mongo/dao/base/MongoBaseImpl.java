@@ -36,9 +36,13 @@ import java.util.Map;
  * @Date : 2016/7/6 21:46
  */
 
-public class MongoBaseImpl<T> implements MongoBase<T> {
+public abstract class MongoBaseImpl<T> implements MongoBase<T> {
 
-    private Class<T> clazz;
+     Class<T> clazz;
+
+    public MongoBaseImpl(Class<T> clazz) {
+        this.clazz = clazz;
+    }
 
     @Resource
     protected MongoOperations mongo;
