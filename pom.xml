@@ -18,6 +18,7 @@
         <module>oa-iservice</module>
         <module>oa-document</module>
         <module>oa-fetch</module>
+        <module>oa-mongo</module>
     </modules>
     <properties>
 
@@ -97,6 +98,12 @@
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpcomponents-client</artifactId>
                 <version>4.3</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongo-java-driver</artifactId>
+                <version>3.2.2</version>
             </dependency>
 
 

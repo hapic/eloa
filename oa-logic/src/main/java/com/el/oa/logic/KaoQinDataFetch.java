@@ -37,14 +37,16 @@ import java.util.Map;
  * @Date : 2016/7/6 20:48
  * 数据处理业务
  */
-public class DataManageLogic {
+public class KaoQinDataFetch {
 
 
-    public List<SignRecord> kaoQinFormatData(Integer signId,String password){
+    public List<SignRecord> fetchData(Integer signId,String password){
         String URL = "http://124.65.191.70:10000/iclock/accounts/login/";
         Map<String,String> params= new HashMap<String, String>();
         params.put("username",signId+"");
         params.put("password",password);
+
+
         ProwlerHelper prowlerHelper= new ProwlerHelper(URL,params);
         String cookie = prowlerHelper.login().cookie();
 
@@ -63,7 +65,7 @@ public class DataManageLogic {
 
             String trim = strLine.trim();
             if(!"".equals(trim) && !"&nbsp;".equals(trim)){
-                System.out.println(trim);
+//                System.out.println(trim);
                 if(i==0){
                     signRecord=new SignRecord();
                     signRecord.setUid(uid);
@@ -96,8 +98,8 @@ public class DataManageLogic {
 
     public static void main(String[] args) {
 
-        DataManageLogic logic= new DataManageLogic();
-        List<SignRecord> signRecords = logic.kaoQinFormatData(30005,"30005");
+        KaoQinDataFetch logic= new KaoQinDataFetch();
+        List<SignRecord> signRecords = logic.fetchData(40052,"188010");
         for(SignRecord sr:signRecords){
             System.out.println("sr = " + sr);
 

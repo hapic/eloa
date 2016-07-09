@@ -98,7 +98,7 @@ public class ProwlerHelper {
                 Header[] allHeaders =
                         response.getAllHeaders();
                 for(Header header:allHeaders){
-                    System.out.println(header);
+//                    System.out.println(header);
                     headerMap.put(header.getName(),header.getValue());
                 }
                 islogin=true;
