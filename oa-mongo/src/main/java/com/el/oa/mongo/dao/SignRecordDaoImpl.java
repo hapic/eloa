@@ -5,7 +5,9 @@ import com.el.oa.mongo.dao.base.MongoBaseImpl;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -34,6 +36,7 @@ import java.util.List;
  * @User : Hapic
  * @Date : 2016/7/6 21:44
  */
+@Service
 public class SignRecordDaoImpl extends MongoBaseImpl<SignRecord> implements ISignRecordDao<SignRecord> {
 
 
