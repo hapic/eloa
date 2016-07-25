@@ -1,6 +1,7 @@
-package com.el.oa.fetch;
+package com.el.oa.fetch.util;
 
 import com.el.oa.domain.kaoqi.SignRecord;
+import com.el.oa.fetch.ProwlerHelper;
 import com.el.oa.fetch.fetch.KaoQinFetchAction;
 import com.el.oa.fetch.model.KaoQinUrlModel;
 
