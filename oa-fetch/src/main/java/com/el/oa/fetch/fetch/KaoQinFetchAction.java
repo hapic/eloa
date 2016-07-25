@@ -1,13 +1,21 @@
 package com.el.oa.fetch.fetch;
 
 import com.el.oa.common.utils.HTMLSpirit;
+import com.el.oa.domain.kaoqi.SignRecord;
 import com.el.oa.fetch.ConsolePipeline;
 import com.el.oa.fetch.KaoQinRecordFetchPageProcessor;
+import com.el.oa.fetch.ProwlerHelper;
 import com.el.oa.fetch.UserInfoFetchPageProcessor;
 import com.el.oa.fetch.model.KaoQinUrlModel;
 import us.codecraft.webmagic.Spider;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -48,7 +56,6 @@ public class KaoQinFetchAction implements FetchAction {
     public Map analyze(String cookie, KaoQinUrlModel model) {
 
         Map map= new HashMap();
-//         String userInfoTargetUrl="http://124.65.191.70:10000/iclock/staff/";
 
         ConsolePipeline consolePipeline = new ConsolePipeline();
 
@@ -61,7 +68,6 @@ public class KaoQinFetchAction implements FetchAction {
         Object uid = consolePipeline.getResult().get("uid");
         map.put("uid",uid);
 
-//        String dataTargetUrl="http://124.65.191.70:10000/iclock/staff/transaction/?p=1&t=staff_transaction.html&UserID__id__exact="+uid+"&fromTime=&toTime=";;
 
         //开始第一次抓取工作
         run(cookie,model,uid+"",1,consolePipeline);
@@ -97,4 +103,8 @@ public class KaoQinFetchAction implements FetchAction {
                 //启动爬虫
                 .run();
     }
+
+
+
+
 }

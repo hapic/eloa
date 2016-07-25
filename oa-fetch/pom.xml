@@ -38,6 +38,11 @@
             <artifactId>oa-common</artifactId>
             <version>${oa-common.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.el.oa</groupId>
+            <artifactId>oa-model</artifactId>
+            <version>${oa-model.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>com.el.sms</groupId>

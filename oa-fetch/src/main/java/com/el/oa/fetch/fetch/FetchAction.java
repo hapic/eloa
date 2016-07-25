@@ -1,5 +1,6 @@
 package com.el.oa.fetch.fetch;
 
+import com.el.oa.domain.kaoqi.SignRecord;
 import com.el.oa.fetch.model.KaoQinUrlModel;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -43,7 +44,5 @@ public interface FetchAction   {
 
 
     Map analyze(String cookie, KaoQinUrlModel model);
-
-    
 
 }
