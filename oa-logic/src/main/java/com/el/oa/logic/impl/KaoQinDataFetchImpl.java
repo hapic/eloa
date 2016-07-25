@@ -39,6 +39,7 @@ import java.util.List;
 @Service
 public class KaoQinDataFetchImpl implements IKaoQinDataFetch {
 
+    @Autowired
     private ISignRecordDao signRecordDao;
 
     /**

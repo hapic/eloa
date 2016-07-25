@@ -1,6 +1,7 @@
 package com.el.oa.logic.impl;
 
 import com.el.oa.BaseTest;
+import com.el.oa.logic.IKaoQinDataFetch;
 import com.el.oa.mongo.dao.ISignRecordDao;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +35,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class KaoQinDataFetchImplTest extends BaseTest{
 
     @Autowired
-    private ISignRecordDao signRecordDao;
+    private IKaoQinDataFetch kaoQinDataFetch;
 
     @Test
     public void testfetchAndSaveSignRecord(){
-        System.out.println("OK" + signRecordDao);
+        kaoQinDataFetch.fetchAndSaveSignRecord(30005,"30005");
 
     }
 }

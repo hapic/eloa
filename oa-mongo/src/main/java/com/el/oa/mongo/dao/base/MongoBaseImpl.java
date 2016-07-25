@@ -44,7 +44,7 @@ public abstract class MongoBaseImpl<T> implements MongoBase<T> {
         this.clazz = clazz;
     }
 
-    @Resource
+    @Resource(name = "mongoTemplate")
     protected MongoOperations mongo;
 
     public void insert(T object, String collectionName) {
