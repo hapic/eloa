@@ -2,6 +2,7 @@ package com.el.oa.fetch;
 
 import com.el.oa.fetch.fetch.FetchAction;
 import com.el.oa.fetch.fetch.KaoQinFetchAction;
+import com.el.oa.fetch.model.KaoQinUrlModel;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -77,8 +78,8 @@ public class ProwlerHelper {
         return split[0];
     }
 
-    public Map fetch(String cookie,FetchAction fetchAction){
-        return fetchAction.analyze(cookie);
+    public Map fetch(String cookie,KaoQinUrlModel model,FetchAction fetchAction){
+        return fetchAction.analyze(cookie,model);
     }
 
     public ProwlerHelper login(){
@@ -128,14 +129,15 @@ public class ProwlerHelper {
 
 
     public static void main(String[] args) {
-        String URL = "http://124.65.191.70:10000/iclock/accounts/login/";
+        KaoQinUrlModel model= new KaoQinUrlModel();
+
         Map<String,String> params= new HashMap<String, String>();
         params.put("username","30005");
         params.put("password","30005");
-        ProwlerHelper prowlerHelper= new ProwlerHelper(URL,params);
+        ProwlerHelper prowlerHelper= new ProwlerHelper(model.getURL(),params);
         String cookie = prowlerHelper.login().cookie();
 
-        Map fetchResult = prowlerHelper.fetch(cookie, new KaoQinFetchAction());
+        Map fetchResult = prowlerHelper.fetch(cookie,model, new KaoQinFetchAction());
 
         System.out.println(fetchResult.get("data"));
 

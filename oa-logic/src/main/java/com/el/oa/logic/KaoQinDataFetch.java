@@ -3,6 +3,7 @@ package com.el.oa.logic;
 import com.el.oa.domain.kaoqi.SignRecord;
 import com.el.oa.fetch.ProwlerHelper;
 import com.el.oa.fetch.fetch.KaoQinFetchAction;
+import com.el.oa.fetch.model.KaoQinUrlModel;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -40,17 +41,18 @@ import java.util.Map;
 public class KaoQinDataFetch {
 
 
-    public List<SignRecord> fetchData(Integer signId,String password){
-        String URL = "http://124.65.191.70:10000/iclock/accounts/login/";
+    public List<SignRecord> fetchData(Integer signId,String password,KaoQinUrlModel model){
+
+
         Map<String,String> params= new HashMap<String, String>();
         params.put("username",signId+"");
         params.put("password",password);
 
 
-        ProwlerHelper prowlerHelper= new ProwlerHelper(URL,params);
+        ProwlerHelper prowlerHelper= new ProwlerHelper(model.getURL(),params);
         String cookie = prowlerHelper.login().cookie();
 
-        Map fetchResult = prowlerHelper.fetch(cookie, new KaoQinFetchAction());
+        Map fetchResult = prowlerHelper.fetch(cookie,model, new KaoQinFetchAction());
         Integer uid = (Integer)fetchResult.get("uid");
         String data = (String)fetchResult.get("data");
 
@@ -69,7 +71,7 @@ public class KaoQinDataFetch {
                 if(i==0){
                     signRecord=new SignRecord();
                     signRecord.setUid(uid);
-                    signRecord.setSignId(30005);
+                    signRecord.setSignId(signId);
                     signRecord.setDate(trim);
                 }else if(i==1){
                     signRecord.setTarget(trim);
@@ -98,13 +100,17 @@ public class KaoQinDataFetch {
 
     public static void main(String[] args) {
 
+        KaoQinUrlModel model= new KaoQinUrlModel();
         KaoQinDataFetch logic= new KaoQinDataFetch();
-        List<SignRecord> signRecords = logic.fetchData(40052,"188010");
+        List<SignRecord> signRecords = logic.fetchData(30005,"30005",model);
         for(SignRecord sr:signRecords){
             System.out.println("sr = " + sr);
 
         }
         System.out.println(signRecords.size());
+
+
+
     }
 
 

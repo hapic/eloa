@@ -1,17 +1,4 @@
-package com.el.oa.fetch.fetch;
-
-import com.el.oa.fetch.model.KaoQinUrlModel;
-import us.codecraft.webmagic.Page;
-import us.codecraft.webmagic.Site;
-import us.codecraft.webmagic.Spider;
-import us.codecraft.webmagic.pipeline.ConsolePipeline;
-import us.codecraft.webmagic.pipeline.JsonFilePipeline;
-import us.codecraft.webmagic.pipeline.Pipeline;
-import us.codecraft.webmagic.processor.PageProcessor;
-import us.codecraft.webmagic.processor.example.OschinaBlogPageProcesser;
-
-import java.util.List;
-import java.util.Map;
+package com.el.oa.fetch.model;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -37,13 +24,44 @@ import java.util.Map;
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  *
  * @User : Hapic
- * @Date : 2016/7/5 19:04
+ * @Date : 2016/7/25 19:12
  */
-public interface FetchAction   {
+public class KaoQinUrlModel {
+    private String URL = "http://124.65.191.70:10000/iclock/accounts/login/";
+    private String userInfoTargetUrl="http://124.65.191.70:10000/iclock/staff/";
+    private String dataTargetUrl="http://124.65.191.70:10000/iclock/staff/transaction/?p=#page#&t=staff_transaction.html&UserID__id__exact=#uid#&fromTime=&toTime=";
 
 
-    Map analyze(String cookie, KaoQinUrlModel model);
+    public KaoQinUrlModel() {
+    }
 
-    
+    public KaoQinUrlModel(String URL, String userInfoTargetUrl, String dataTargetUrl) {
+        this.URL = URL;
+        this.userInfoTargetUrl = userInfoTargetUrl;
+        this.dataTargetUrl = dataTargetUrl;
+    }
 
+    public String getURL() {
+        return URL;
+    }
+
+    public void setURL(String URL) {
+        this.URL = URL;
+    }
+
+    public String getUserInfoTargetUrl() {
+        return userInfoTargetUrl;
+    }
+
+    public void setUserInfoTargetUrl(String userInfoTargetUrl) {
+        this.userInfoTargetUrl = userInfoTargetUrl;
+    }
+
+    public String getDataTargetUrl() {
+        return dataTargetUrl;
+    }
+
+    public void setDataTargetUrl(String dataTargetUrl) {
+        this.dataTargetUrl = dataTargetUrl;
+    }
 }

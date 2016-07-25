@@ -4,6 +4,7 @@ import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
+import us.codecraft.webmagic.selector.Html;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -50,7 +51,14 @@ public class KaoQinRecordFetchPageProcessor implements PageProcessor {
         // 部分二：定义如何抽取页面信息，并保存下来
 //        page.putField("author", page.getUrl().regex("http://my\\.oschina\\.net/flashsword/blog/\\d+").toString());
 //        page.putField("title", page.getHtml().xpath("//div[@class='BlogEntity']/div[@class='BlogTitle']/h1").toString());
-        page.putField("content", page.getHtml().xpath("//table[@id]/tbody").toString());
+        Html html = page.getHtml();
+        page.putField("content", html.xpath("//table[@id]/tbody").toString());
+       
+        String pageNum =html.regex("page_number_emp=\\d*")
+                .replace("\"","")
+                .toString().split("=")[1];
+
+        page.putField("totalPage",pageNum);
 //        page.putField("tags", page.getHtml().xpath("//div[@class='BlogTags']/a/text()").all());
     }
 

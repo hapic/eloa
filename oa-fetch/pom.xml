@@ -39,6 +39,11 @@
             <version>${oa-common.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.el.sms</groupId>
+            <artifactId>sms-client</artifactId>
+        </dependency>
+
     </dependencies>
 
 
