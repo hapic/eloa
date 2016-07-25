@@ -1,14 +1,13 @@
-package com.el.oa.mongo.dao;
+package com.el.oa.logic.impl;
 
 import com.el.oa.domain.kaoqi.SignRecord;
-import com.el.oa.mongo.dao.base.MongoBaseImpl;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.stereotype.Component;
+import com.el.oa.fetch.model.KaoQinUrlModel;
+import com.el.oa.fetch.util.SignRecordUtil;
+import com.el.oa.logic.IKaoQinDataFetch;
+import com.el.oa.mongo.dao.ISignRecordDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -35,23 +34,26 @@ import java.util.List;
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  *
  * @User : Hapic
- * @Date : 2016/7/6 21:44
+ * @Date : 2016/7/25 20:26
  */
-@Component
-public class SignRecordDaoImpl extends MongoBaseImpl<SignRecord> implements ISignRecordDao<SignRecord> {
+@Service
+public class KaoQinDataFetchImpl implements IKaoQinDataFetch {
+
+    private ISignRecordDao signRecordDao;
+
+    /**
+     * 获取考勤记录并保存到mongo里面
+     * @param userName
+     * @param password
+     */
+    @Override
+    public void fetchAndSaveSignRecord(Integer userName,String password){
+        List<SignRecord> signRecordList = SignRecordUtil.fetchData(userName, password, new KaoQinUrlModel());
+        for(SignRecord sr:signRecordList){
+            signRecordDao.insert(sr,"signRecord_"+userName);
+        }
 
 
-    public SignRecordDaoImpl() {
-        super(SignRecord.class);
     }
 
-    public void addRecord(Criteria criteria, List<String> logs, String collectionName) {
-        Update upd = new Update();
-        upd.pushAll("content", logs.toArray());
-        this.mongo.updateMulti(new Query(criteria), upd, SignRecord.class, collectionName);
-    }
-
-    public List<SignRecord> find(Criteria criteria, String collectionName) {
-        return super.mongo.find(new Query(criteria), SignRecord.class, collectionName);
-    }
 }

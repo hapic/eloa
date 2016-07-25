@@ -1,15 +1,9 @@
-package com.el.oa.mongo.dao;
+package com.el.oa.logic.impl;
 
-import com.el.oa.domain.kaoqi.SignRecord;
-import com.el.oa.mongo.dao.base.MongoBaseImpl;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import java.util.List;
+import com.el.oa.BaseTest;
+import com.el.oa.mongo.dao.ISignRecordDao;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -35,23 +29,16 @@ import java.util.List;
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  *
  * @User : Hapic
- * @Date : 2016/7/6 21:44
+ * @Date : 2016/7/25 20:36
  */
-@Component
-public class SignRecordDaoImpl extends MongoBaseImpl<SignRecord> implements ISignRecordDao<SignRecord> {
+public class KaoQinDataFetchImplTest extends BaseTest{
 
+    @Autowired
+    private ISignRecordDao signRecordDao;
 
-    public SignRecordDaoImpl() {
-        super(SignRecord.class);
-    }
+    @Test
+    public void testfetchAndSaveSignRecord(){
+        System.out.println("OK" + signRecordDao);
 
-    public void addRecord(Criteria criteria, List<String> logs, String collectionName) {
-        Update upd = new Update();
-        upd.pushAll("content", logs.toArray());
-        this.mongo.updateMulti(new Query(criteria), upd, SignRecord.class, collectionName);
-    }
-
-    public List<SignRecord> find(Criteria criteria, String collectionName) {
-        return super.mongo.find(new Query(criteria), SignRecord.class, collectionName);
     }
 }

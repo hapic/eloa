@@ -1,15 +1,4 @@
-package com.el.oa.mongo.dao;
-
-import com.el.oa.domain.kaoqi.SignRecord;
-import com.el.oa.mongo.dao.base.MongoBaseImpl;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import java.util.List;
+package com.el.oa.logic;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -35,23 +24,8 @@ import java.util.List;
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  *
  * @User : Hapic
- * @Date : 2016/7/6 21:44
+ * @Date : 2016/7/25 20:27
  */
-@Component
-public class SignRecordDaoImpl extends MongoBaseImpl<SignRecord> implements ISignRecordDao<SignRecord> {
-
-
-    public SignRecordDaoImpl() {
-        super(SignRecord.class);
-    }
-
-    public void addRecord(Criteria criteria, List<String> logs, String collectionName) {
-        Update upd = new Update();
-        upd.pushAll("content", logs.toArray());
-        this.mongo.updateMulti(new Query(criteria), upd, SignRecord.class, collectionName);
-    }
-
-    public List<SignRecord> find(Criteria criteria, String collectionName) {
-        return super.mongo.find(new Query(criteria), SignRecord.class, collectionName);
-    }
+public interface IKaoQinDataFetch {
+    void fetchAndSaveSignRecord(Integer userName, String password);
 }

@@ -1,15 +1,14 @@
-package com.el.oa.mongo.dao;
+package com.el.oa.logic;
 
-import com.el.oa.domain.kaoqi.SignRecord;
-import com.el.oa.mongo.dao.base.MongoBaseImpl;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
-import javax.annotation.Resource;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -35,23 +34,20 @@ import java.util.List;
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  *
  * @User : Hapic
- * @Date : 2016/7/6 21:44
+ * @Date : 2016/7/25 20:39
  */
-@Component
-public class SignRecordDaoImpl extends MongoBaseImpl<SignRecord> implements ISignRecordDao<SignRecord> {
+@SpringBootApplication
+public class SampleApplication {
 
+    public static void main(String[] args) {
 
-    public SignRecordDaoImpl() {
-        super(SignRecord.class);
-    }
+        SpringApplication app = new SpringApplication(SampleApplication.class);
+        app.setWebEnvironment(true);
+//        app.setShowBanner(false);
 
-    public void addRecord(Criteria criteria, List<String> logs, String collectionName) {
-        Update upd = new Update();
-        upd.pushAll("content", logs.toArray());
-        this.mongo.updateMulti(new Query(criteria), upd, SignRecord.class, collectionName);
-    }
-
-    public List<SignRecord> find(Criteria criteria, String collectionName) {
-        return super.mongo.find(new Query(criteria), SignRecord.class, collectionName);
+        Set<Object> set = new HashSet<Object>();
+//        set.add("classpath:applicationContext.xml");
+        app.setSources(set);
+        app.run(args);
     }
 }
