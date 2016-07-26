@@ -95,8 +95,17 @@ public class KaoQinFetchAction implements FetchAction {
 
 
     private void run(String cookie,KaoQinUrlModel model,String uid,Integer page,ConsolePipeline consolePipeline){
+        String url = model.getDataTargetUrl()
+                .replaceAll("&UserID__id__exact=", "&UserID__id__exact=" + uid)
+                .replaceAll("\\?p=", "?p=" + page);
+        if(model.getStartTime()!=null){
+            url.replaceAll("&fromTime=","&fromTime="+model.getStartTime());
+        }
+        if(model.getEndTime()!=null){
+            url.replaceAll("&toTime=","&toTime="+model.getEndTime());
+        }
         Spider.create(new KaoQinRecordFetchPageProcessor(cookie))
-                .addUrl(model.getDataTargetUrl().replaceAll("#uid#",uid+"").replaceAll("#page#",page+""))
+                .addUrl(url)
                 .addPipeline(consolePipeline)
                 //保存结果
                 .thread(5)

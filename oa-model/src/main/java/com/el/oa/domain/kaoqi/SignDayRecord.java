@@ -26,25 +26,33 @@ import java.io.Serializable;
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  *
  * @User : Hapic
- * @Date : 2016/7/6 20:41
+ * @Date : 2016/7/26 19:40
  */
-public class SignRecord implements Serializable{
-
+public class SignDayRecord implements Serializable{
 
     private Integer signId;//打卡id
     private Integer uid;//用户id
-    private String date;//打卡时间
-    private String target;//打卡目的
-    private String type;//打卡方式
-    private String machineNum;//机器编码
+    private String day;//日期
+    private String onDuty;//上班时间
+    private String offDuty;//下班时间
+    private int jiaban;//以分钟为单位
+    private int chidao;//以分钟为单位
 
+    public SignDayRecord(Integer signId, Integer uid, String day, String onDuty, String offDuty) {
+        this.signId = signId;
+        this.uid = uid;
+        this.day = day;
+        this.onDuty = onDuty;
+        this.offDuty = offDuty;
 
-    public Integer getUid() {
-        return uid;
     }
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
+    public int getJiaban() {
+        return jiaban;
+    }
+
+    public void setJiaban(int jiaban) {
+        this.jiaban = jiaban;
     }
 
     public Integer getSignId() {
@@ -55,47 +63,56 @@ public class SignRecord implements Serializable{
         this.signId = signId;
     }
 
-    public String getTarget() {
-        return target;
+    public Integer getUid() {
+        return uid;
     }
 
-    public void setTarget(String target) {
-        this.target = target;
+    public void setUid(Integer uid) {
+        this.uid = uid;
     }
 
-    public String getType() {
-        return type;
+    public String getDay() {
+        return day;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setDay(String day) {
+        this.day = day;
     }
 
-    public String getMachineNum() {
-        return machineNum;
+    public String getOnDuty() {
+        return onDuty;
     }
 
-    public void setMachineNum(String machineNum) {
-        this.machineNum = machineNum;
+    public void setOnDuty(String onDuty) {
+        this.onDuty = onDuty;
     }
 
-    public String getDate() {
-        return date;
+    public String getOffDuty() {
+        return offDuty;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setOffDuty(String offDuty) {
+        this.offDuty = offDuty;
+    }
+
+    public int getChidao() {
+        return chidao;
+    }
+
+    public void setChidao(int chidao) {
+        this.chidao = chidao;
     }
 
     @Override
     public String toString() {
-        return "SignRecord{" +
+        return "SignDayRecord{" +
                 "signId=" + signId +
                 ", uid=" + uid +
-                ", date='" + date + '\'' +
-                ", target='" + target + '\'' +
-                ", type='" + type + '\'' +
-                ", machineNum='" + machineNum + '\'' +
+                ", day='" + day + '\'' +
+                ", onDuty='" + onDuty + '\'' +
+                ", offDuty='" + offDuty + '\'' +
+                ", jiaban=" + jiaban +
+                ", chidao=" + chidao +
                 '}';
     }
 }

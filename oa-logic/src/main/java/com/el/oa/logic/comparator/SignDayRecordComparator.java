@@ -1,11 +1,10 @@
-package com.el.oa.logic;
+package com.el.oa.logic.comparator;
 
-import com.el.oa.domain.kaoqi.KaoQinRecord;
+import com.el.oa.common.utils.DateUtils;
 import com.el.oa.domain.kaoqi.SignDayRecord;
-import com.el.oa.domain.kaoqi.SignRecord;
 
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.util.Comparator;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -31,12 +30,20 @@ import java.util.Map;
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  *
  * @User : Hapic
- * @Date : 2016/7/25 20:27
+ * @Date : 2016/7/26 20:08
  */
-public interface IKaoQinDataFetch {
-    void fetchAndSaveSignRecord(Integer userName, String password);
+public class SignDayRecordComparator implements Comparator<SignDayRecord> {
 
-    List<SignRecord> loadSingRecordByTime(Integer userName, String startTime, String endTime);
 
-    List<SignDayRecord> loadJiabanSignDayRecord(Integer userName, String startTime, String endTime);
+    @Override
+    public int compare(SignDayRecord o1, SignDayRecord o2) {
+        try {
+            int first = DateUtils.stringDayToInt(o1.getDay());
+            int second = DateUtils.stringDayToInt(o2.getDay());
+            return first-second;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

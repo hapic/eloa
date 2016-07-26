@@ -75,12 +75,13 @@ public class SignRecordUtil {
                         signRecord=new SignRecord();
                         signRecord.setUid(uid);
                         signRecord.setSignId(signId);
-                        try {
+                        signRecord.setDate(trim);
+                        /*try {
                             int time = DateUtils.stringDateToInt(trim);
                             signRecord.setDate(time+"");
                         } catch (ParseException e) {
                             e.printStackTrace();
-                        }
+                        }*/
                     }else if(i==1){
                         signRecord.setTarget(trim);
                     }else if(i==2){

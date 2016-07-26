@@ -11,5 +11,17 @@
 
     <artifactId>oa-controller</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.el.oa</groupId>
+            <artifactId>oa-logic</artifactId>
+            <version>${oa-logic.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.el.oa</groupId>
+            <artifactId>oa-model</artifactId>
+            <version>${oa-model.version}</version>
+        </dependency>
 
+    </dependencies>
 </project>

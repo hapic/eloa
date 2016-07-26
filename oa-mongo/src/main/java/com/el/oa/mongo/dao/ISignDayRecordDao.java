@@ -1,11 +1,9 @@
-package com.el.oa.logic;
+package com.el.oa.mongo.dao;
 
-import com.el.oa.domain.kaoqi.KaoQinRecord;
-import com.el.oa.domain.kaoqi.SignDayRecord;
-import com.el.oa.domain.kaoqi.SignRecord;
+import com.el.oa.mongo.dao.base.MongoBase;
+import org.springframework.data.mongodb.core.query.Criteria;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -31,12 +29,12 @@ import java.util.Map;
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  *
  * @User : Hapic
- * @Date : 2016/7/25 20:27
+ * @Date : 2016/7/6 21:42
  */
-public interface IKaoQinDataFetch {
-    void fetchAndSaveSignRecord(Integer userName, String password);
+public interface ISignDayRecordDao<SignDayRecord> extends MongoBase<SignDayRecord> {
 
-    List<SignRecord> loadSingRecordByTime(Integer userName, String startTime, String endTime);
 
-    List<SignDayRecord> loadJiabanSignDayRecord(Integer userName, String startTime, String endTime);
+    void addRecord(Criteria var1, List<String> var2, String var3);
+
+    List<SignDayRecord> find(Criteria var1, String var2);
 }

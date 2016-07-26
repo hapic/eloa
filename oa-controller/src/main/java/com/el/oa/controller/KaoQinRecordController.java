@@ -1,11 +1,10 @@
-package com.el.oa.logic;
+package com.el.oa.controller;
 
-import com.el.oa.domain.kaoqi.KaoQinRecord;
-import com.el.oa.domain.kaoqi.SignDayRecord;
-import com.el.oa.domain.kaoqi.SignRecord;
-
-import java.util.List;
-import java.util.Map;
+import com.el.oa.logic.IKaoQinDataFetch;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -31,12 +30,16 @@ import java.util.Map;
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  *
  * @User : Hapic
- * @Date : 2016/7/25 20:27
+ * @Date : 2016/7/26 19:15
  */
-public interface IKaoQinDataFetch {
-    void fetchAndSaveSignRecord(Integer userName, String password);
+@RestController
+@RequestMapping(value="/kq")
+public class KaoQinRecordController {
 
-    List<SignRecord> loadSingRecordByTime(Integer userName, String startTime, String endTime);
+    @Autowired
+    private IKaoQinDataFetch kaoQinDataFetch;
 
-    List<SignDayRecord> loadJiabanSignDayRecord(Integer userName, String startTime, String endTime);
+
+
+
 }

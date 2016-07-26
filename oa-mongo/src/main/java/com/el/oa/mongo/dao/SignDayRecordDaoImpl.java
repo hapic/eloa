@@ -1,11 +1,14 @@
-package com.el.oa.logic;
+package com.el.oa.mongo.dao;
 
-import com.el.oa.domain.kaoqi.KaoQinRecord;
 import com.el.oa.domain.kaoqi.SignDayRecord;
 import com.el.oa.domain.kaoqi.SignRecord;
+import com.el.oa.mongo.dao.base.MongoBaseImpl;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -31,12 +34,23 @@ import java.util.Map;
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  *
  * @User : Hapic
- * @Date : 2016/7/25 20:27
+ * @Date : 2016/7/6 21:44
  */
-public interface IKaoQinDataFetch {
-    void fetchAndSaveSignRecord(Integer userName, String password);
+@Component
+public class SignDayRecordDaoImpl extends MongoBaseImpl<SignDayRecord> implements ISignDayRecordDao<SignDayRecord> {
 
-    List<SignRecord> loadSingRecordByTime(Integer userName, String startTime, String endTime);
 
-    List<SignDayRecord> loadJiabanSignDayRecord(Integer userName, String startTime, String endTime);
+    public SignDayRecordDaoImpl() {
+        super(SignDayRecord.class);
+    }
+
+    public void addRecord(Criteria criteria, List<String> logs, String collectionName) {
+        Update upd = new Update();
+        upd.pushAll("content", logs.toArray());
+        this.mongo.updateMulti(new Query(criteria), upd, SignDayRecord.class, collectionName);
+    }
+
+    public List<SignDayRecord> find(Criteria criteria, String collectionName) {
+        return super.mongo.find(new Query(criteria), SignDayRecord.class, collectionName);
+    }
 }

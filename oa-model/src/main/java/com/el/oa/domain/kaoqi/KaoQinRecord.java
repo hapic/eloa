@@ -1,11 +1,6 @@
-package com.el.oa.logic;
+package com.el.oa.domain.kaoqi;
 
-import com.el.oa.domain.kaoqi.KaoQinRecord;
-import com.el.oa.domain.kaoqi.SignDayRecord;
-import com.el.oa.domain.kaoqi.SignRecord;
-
-import java.util.List;
-import java.util.Map;
+import java.io.Serializable;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -31,12 +26,54 @@ import java.util.Map;
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  *
  * @User : Hapic
- * @Date : 2016/7/25 20:27
+ * @Date : 2016/7/26 19:22
  */
-public interface IKaoQinDataFetch {
-    void fetchAndSaveSignRecord(Integer userName, String password);
+public class KaoQinRecord implements Serializable{
 
-    List<SignRecord> loadSingRecordByTime(Integer userName, String startTime, String endTime);
+    private Integer signId;//打卡id
+    private Integer uid;//用户id
+    private String month;//统计的月份
+    private Integer jiaban;//加班次数
+    private Integer chidao;//迟到次数
 
-    List<SignDayRecord> loadJiabanSignDayRecord(Integer userName, String startTime, String endTime);
+
+    public Integer getChidao() {
+        return chidao;
+    }
+
+    public void setChidao(Integer chidao) {
+        this.chidao = chidao;
+    }
+
+    public Integer getSignId() {
+        return signId;
+    }
+
+    public void setSignId(Integer signId) {
+        this.signId = signId;
+    }
+
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public Integer getJiaban() {
+        return jiaban;
+    }
+
+    public void setJiaban(Integer jiaban) {
+        this.jiaban = jiaban;
+    }
 }

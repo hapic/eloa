@@ -29,7 +29,9 @@ package com.el.oa.fetch.model;
 public class KaoQinUrlModel {
     private String URL = "http://124.65.191.70:10000/iclock/accounts/login/";
     private String userInfoTargetUrl="http://124.65.191.70:10000/iclock/staff/";
-    private String dataTargetUrl="http://124.65.191.70:10000/iclock/staff/transaction/?p=#page#&t=staff_transaction.html&UserID__id__exact=#uid#&fromTime=&toTime=";
+    private String dataTargetUrl="http://124.65.191.70:10000/iclock/staff/transaction/?p=&t=staff_transaction.html&UserID__id__exact=&fromTime=&toTime=";
+    private String startTime;
+    private String endTime;
 
 
     public KaoQinUrlModel() {
@@ -39,6 +41,22 @@ public class KaoQinUrlModel {
         this.URL = URL;
         this.userInfoTargetUrl = userInfoTargetUrl;
         this.dataTargetUrl = dataTargetUrl;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
     public String getURL() {

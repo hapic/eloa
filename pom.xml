@@ -32,6 +32,7 @@
         <oa-fetch.version>1.0-SNAPSHOT</oa-fetch.version>
         <oa-model.version>1.0-SNAPSHOT</oa-model.version>
         <oa-mongo.version>1.0-SNAPSHOT</oa-mongo.version>
+        <oa-logic.version>1.0-SNAPSHOT</oa-logic.version>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
