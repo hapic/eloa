@@ -1,5 +1,6 @@
 package com.el.oa.fetch.util;
 
+import com.el.oa.common.utils.DateUtils;
 import com.el.oa.domain.kaoqi.SignRecord;
 import com.el.oa.fetch.ProwlerHelper;
 import com.el.oa.fetch.fetch.KaoQinFetchAction;
@@ -9,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -73,7 +75,12 @@ public class SignRecordUtil {
                         signRecord=new SignRecord();
                         signRecord.setUid(uid);
                         signRecord.setSignId(signId);
-                        signRecord.setDate(trim);
+                        try {
+                            int time = DateUtils.stringDateToInt(trim);
+                            signRecord.setDate(time+"");
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                     }else if(i==1){
                         signRecord.setTarget(trim);
                     }else if(i==2){

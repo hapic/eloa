@@ -1,10 +1,8 @@
-package com.el.oa.logic.impl;
+package com.el.oa.common.utils;
 
-import com.el.oa.BaseTest;
-import com.el.oa.logic.IKaoQinDataFetch;
-import com.el.oa.mongo.dao.ISignRecordDao;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -30,16 +28,21 @@ import org.springframework.beans.factory.annotation.Autowired;
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  *
  * @User : Hapic
- * @Date : 2016/7/25 20:36
+ * @Date : 2016/7/25 21:58
  */
-public class KaoQinDataFetchImplTest extends BaseTest{
+public class DateUtils {
 
-    @Autowired
-    private IKaoQinDataFetch kaoQinDataFetch;
 
-    @Test
-    public void testfetchAndSaveSignRecord(){
-        kaoQinDataFetch.fetchAndSaveSignRecord(30001,"30001");
-
+    /**
+     * 将一个字符串型日期数据（年-月-日 时：分：秒 ）转化为十位整数值（秒数）
+     *
+     * @param sdate
+     * @return
+     * @throws ParseException
+     */
+    public static int stringDateToInt(String sdate) throws ParseException {
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = sf.parse(sdate);
+        return (int) (date.getTime() / 1000);
     }
 }
