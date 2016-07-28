@@ -1,12 +1,14 @@
-package com.el.oa.logic;
+package com.el.oa.mongo.dao;
 
-import com.el.oa.domain.kaoqi.KaoQinRecord;
+import com.el.oa.domain.kaoqi.LastPoint;
 import com.el.oa.domain.kaoqi.SignDayRecord;
-import com.el.oa.domain.kaoqi.SignRecord;
-import com.el.oa.fetch.model.KaoQinUrlModel;
+import com.el.oa.mongo.dao.base.MongoBaseImpl;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -32,16 +34,23 @@ import java.util.Map;
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  *
  * @User : Hapic
- * @Date : 2016/7/25 20:27
+ * @Date : 2016/7/6 21:44
  */
-public interface IKaoQinDataFetch {
-    void fetchAndSaveSignRecord(Integer userName, String password);
+@Component
+public class LastPointDaoImpl extends MongoBaseImpl<LastPoint> implements ILastPointDao<LastPoint> {
 
-    void fetchAndSaveSignRecord(Integer userName, String password, KaoQinUrlModel model);
 
-    String lastInpointDate(Integer userName);
+    public LastPointDaoImpl() {
+        super(LastPoint.class);
+    }
 
-    List<SignRecord> loadSingRecordByTime(Integer userName, String startTime, String endTime);
+    public void addRecord(Criteria criteria, List<String> logs, String collectionName) {
+        Update upd = new Update();
+        upd.pushAll("content", logs.toArray());
+        this.mongo.updateMulti(new Query(criteria), upd, SignDayRecord.class, collectionName);
+    }
 
-    List<SignDayRecord> loadJiabanSignDayRecord(Integer userName, String startTime, String endTime);
+    public List<LastPoint> find(Criteria criteria, String collectionName) {
+        return super.mongo.find(new Query(criteria), LastPoint.class, collectionName);
+    }
 }

@@ -55,6 +55,10 @@ public class SignRecordUtil {
         ProwlerHelper prowlerHelper= new ProwlerHelper(model.getURL(),params);
         String cookie = prowlerHelper.login().cookie();
 
+        if(cookie==null){
+            return null;
+        }
+
         Map fetchResult = prowlerHelper.fetch(cookie,model, new KaoQinFetchAction());
         Integer uid = (Integer)fetchResult.get("uid");
         String data = (String)fetchResult.get("data");

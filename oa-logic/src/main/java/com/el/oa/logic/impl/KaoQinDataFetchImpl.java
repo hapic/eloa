@@ -6,8 +6,10 @@ import com.el.oa.domain.kaoqi.SignDayRecord;
 import com.el.oa.domain.kaoqi.SignRecord;
 import com.el.oa.fetch.model.KaoQinUrlModel;
 import com.el.oa.fetch.util.SignRecordUtil;
+import com.el.oa.iservice.kaoqin.IKaoQinDataService;
 import com.el.oa.logic.IKaoQinDataFetch;
 import com.el.oa.logic.util.SignRecordFactory;
+import com.el.oa.mongo.dao.ILastPointDao;
 import com.el.oa.mongo.dao.ISignDayRecordDao;
 import com.el.oa.mongo.dao.ISignRecordDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,11 +48,10 @@ import java.util.*;
 @Service
 public class KaoQinDataFetchImpl implements IKaoQinDataFetch {
 
-    @Autowired
-    private ISignRecordDao signRecordDao;
+
 
     @Autowired
-    private ISignDayRecordDao signDayRecordDao;
+    private IKaoQinDataService kaoQinDataService;
 
     /**
      * 获取考勤记录并保存到mongo里面
@@ -59,15 +60,38 @@ public class KaoQinDataFetchImpl implements IKaoQinDataFetch {
      */
     @Override
     public void fetchAndSaveSignRecord(Integer userName,String password){
-        List<SignRecord> signRecordList = SignRecordUtil.fetchData(userName, password, new KaoQinUrlModel());
+       fetchAndSaveSignRecord(userName,password,new KaoQinUrlModel());
+    }
+
+    @Override
+    public void fetchAndSaveSignRecord(Integer userName, String password, KaoQinUrlModel model){
+        String s = lastInpointDate(userName);
+        if(s!=null){
+            model.setStartTime(s);
+        }
+        List<SignRecord> signRecordList = SignRecordUtil.fetchData(userName, password, model);
         for(SignRecord sr:signRecordList){
-            signRecordDao.insert(sr,"signRecord_"+userName);
+//            signRecordDao.insert(sr,"signRecord_"+userName);
+            kaoQinDataService.saveSignRecord(sr);
         }
 
         List<SignDayRecord> signDayRecords = SignRecordFactory.arrangeRecord(signRecordList);
         for(SignDayRecord sdr:signDayRecords){
-            signDayRecordDao.insert(sdr,"signDayRecord_"+userName);
+//            signDayRecordDao.insert(sdr,"signDayRecord_"+userName);
+            kaoQinDataService.saveSignDayRecord(sdr);
         }
+
+        kaoQinDataService.pointDate(userName);
+    }
+
+    /**
+     * 上次导入的时间
+     * @param userName
+     * @return
+     */
+    @Override
+    public String lastInpointDate(Integer userName){
+        return kaoQinDataService.lastInpointDate(userName);
     }
 
     /**
@@ -79,12 +103,11 @@ public class KaoQinDataFetchImpl implements IKaoQinDataFetch {
      */
     @Override
     public List<SignRecord> loadSingRecordByTime(Integer userName, String startTime, String endTime){
-        Criteria criteria= Criteria.where("date").gte(startTime).lte(endTime);
-        return signRecordDao.find(criteria, "signRecord_" + userName);
+        return kaoQinDataService.loadSingRecordByTime(userName,startTime,endTime);
     }
 
     /**
-     * 获取加班的记录
+     * 查找加班记录
      * @param userName
      * @param startTime
      * @param endTime
@@ -92,8 +115,7 @@ public class KaoQinDataFetchImpl implements IKaoQinDataFetch {
      */
     @Override
     public List<SignDayRecord> loadJiabanSignDayRecord(Integer userName, String startTime, String endTime){
-        Criteria criteria= Criteria.where("jiaban").gte(2*60);
-        return signDayRecordDao.find(criteria, "signDayRecord_" + userName);
+       return kaoQinDataService.loadJiabanSignDayRecord(userName,startTime,endTime);
     }
 
 

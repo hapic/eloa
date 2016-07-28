@@ -1,12 +1,6 @@
-package com.el.oa.logic;
+package com.el.oa.domain.kaoqi;
 
-import com.el.oa.domain.kaoqi.KaoQinRecord;
-import com.el.oa.domain.kaoqi.SignDayRecord;
-import com.el.oa.domain.kaoqi.SignRecord;
-import com.el.oa.fetch.model.KaoQinUrlModel;
-
-import java.util.List;
-import java.util.Map;
+import java.io.Serializable;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -32,16 +26,26 @@ import java.util.Map;
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  *
  * @User : Hapic
- * @Date : 2016/7/25 20:27
+ * @Date : 2016/7/28 20:35
  */
-public interface IKaoQinDataFetch {
-    void fetchAndSaveSignRecord(Integer userName, String password);
+public class LastPoint implements Serializable {
+    private Integer signId;//打卡id
+    private String pointDate;//上次导入的时间
 
-    void fetchAndSaveSignRecord(Integer userName, String password, KaoQinUrlModel model);
+    public Integer getSignId() {
+        return signId;
+    }
 
-    String lastInpointDate(Integer userName);
+    public void setSignId(Integer signId) {
+        this.signId = signId;
+    }
 
-    List<SignRecord> loadSingRecordByTime(Integer userName, String startTime, String endTime);
 
-    List<SignDayRecord> loadJiabanSignDayRecord(Integer userName, String startTime, String endTime);
+    public String getPointDate() {
+        return pointDate;
+    }
+
+    public void setPointDate(String pointDate) {
+        this.pointDate = pointDate;
+    }
 }

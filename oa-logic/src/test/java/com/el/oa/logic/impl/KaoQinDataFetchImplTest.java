@@ -66,7 +66,7 @@ public class KaoQinDataFetchImplTest extends BaseTest{
 
     @Test
     public void testloadJiabanSignDayRecord(){
-        List<SignDayRecord> list = kaoQinDataFetch.loadJiabanSignDayRecord(30045, "2016-07-01 00:00:00", "2016-07-26 23:59:59");
+        List<SignDayRecord> list = kaoQinDataFetch.loadJiabanSignDayRecord(30045, "2016-07-07 00:00:00", "2016-07-26 23:59:59");
         System.out.println(list.size());
         for(SignDayRecord sdr:list){
             System.out.println(sdr);

@@ -1,12 +1,4 @@
-package com.el.oa.logic;
-
-import com.el.oa.domain.kaoqi.KaoQinRecord;
-import com.el.oa.domain.kaoqi.SignDayRecord;
-import com.el.oa.domain.kaoqi.SignRecord;
-import com.el.oa.fetch.model.KaoQinUrlModel;
-
-import java.util.List;
-import java.util.Map;
+package com.el.oa.controller.model;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -32,16 +24,43 @@ import java.util.Map;
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  *
  * @User : Hapic
- * @Date : 2016/7/25 20:27
+ * @Date : 2016/7/28 20:29
  */
-public interface IKaoQinDataFetch {
-    void fetchAndSaveSignRecord(Integer userName, String password);
+public class User {
+    private String userName;
+    private String password;
+    private String host="http://124.65.191.70:10000";
+    private String URL = "/iclock/accounts/login/";
 
-    void fetchAndSaveSignRecord(Integer userName, String password, KaoQinUrlModel model);
+    public String getUserName() {
+        return userName;
+    }
 
-    String lastInpointDate(Integer userName);
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
-    List<SignRecord> loadSingRecordByTime(Integer userName, String startTime, String endTime);
+    public String getPassword() {
+        return password;
+    }
 
-    List<SignDayRecord> loadJiabanSignDayRecord(Integer userName, String startTime, String endTime);
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    public String getURL() {
+        return host+URL;
+    }
+
+    public void setURL(String URL) {
+        this.URL = URL;
+    }
 }

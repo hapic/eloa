@@ -4,6 +4,7 @@ import com.el.oa.fetch.fetch.FetchAction;
 import com.el.oa.fetch.fetch.KaoQinFetchAction;
 import com.el.oa.fetch.model.KaoQinUrlModel;
 import org.apache.http.Header;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -72,8 +73,11 @@ public class ProwlerHelper {
 
 
     public String cookie(){
-        haveLogin();
+//        haveLogin();
         String s = headerMap.get("Set-Cookie");
+        if(null == s){
+            return null;
+        }
         String[] split = s.split(";");
         return split[0];
     }
@@ -93,7 +97,7 @@ public class ProwlerHelper {
 
             HttpResponse response;
             response = client.execute(post);
-//            HttpEntity entity2 = response.getEntity();
+            HttpEntity entity2 = response.getEntity();
             if (entity != null) {
 
                 Header[] allHeaders =
@@ -102,7 +106,10 @@ public class ProwlerHelper {
 //                    System.out.println(header);
                     headerMap.put(header.getName(),header.getValue());
                 }
-                islogin=true;
+                if(cookie()!=null){
+                    islogin=true;
+                }
+
 
             }
         } catch (ClientProtocolException e) {
@@ -133,10 +140,10 @@ public class ProwlerHelper {
 
         Map<String,String> params= new HashMap<String, String>();
         params.put("username","30005");
-        params.put("password","30005");
+        params.put("password","30004");
         ProwlerHelper prowlerHelper= new ProwlerHelper(model.getURL(),params);
         String cookie = prowlerHelper.login().cookie();
-
+        System.out.println(cookie);
         Map fetchResult = prowlerHelper.fetch(cookie,model, new KaoQinFetchAction());
 
         System.out.println(fetchResult.get("data"));

@@ -1,4 +1,4 @@
-package com.el.oa.fetch.model;
+package com.el.oa.controller.model;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -24,22 +24,65 @@ package com.el.oa.fetch.model;
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  *
  * @User : Hapic
- * @Date : 2016/7/25 19:12
+ * @Date : 2016/7/28 20:07
  */
-public class KaoQinUrlModel {
+public class RuleModel {
+    private String userName;
+    private String password;
     private String host="http://124.65.191.70:10000";
-    private String URL = "/iclock/accounts/login/";
-    private String userInfoTargetUrl="/iclock/staff/";
-    private String dataTargetUrl="/iclock/staff/transaction/?p=&t=staff_transaction.html&UserID__id__exact=&fromTime=&toTime=";
+    private String URL = host+"/iclock/accounts/login/";
+    private String userInfoTargetUrl=host+"/iclock/staff/";
+    private String dataTargetUrl=host+"/iclock/staff/transaction/?p=&t=staff_transaction.html&UserID__id__exact=&fromTime=&toTime=";
     private String startTime;
     private String endTime;
 
 
-    public KaoQinUrlModel() {
+    public String getUserName() {
+        return userName;
     }
 
-    public KaoQinUrlModel(String host) {
-        this.host=host;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    public String getURL() {
+        return URL;
+    }
+
+    public void setURL(String URL) {
+        this.URL = URL;
+    }
+
+    public String getUserInfoTargetUrl() {
+        return userInfoTargetUrl;
+    }
+
+    public void setUserInfoTargetUrl(String userInfoTargetUrl) {
+        this.userInfoTargetUrl = userInfoTargetUrl;
+    }
+
+    public String getDataTargetUrl() {
+        return dataTargetUrl;
+    }
+
+    public void setDataTargetUrl(String dataTargetUrl) {
+        this.dataTargetUrl = dataTargetUrl;
     }
 
     public String getStartTime() {
@@ -56,29 +99,5 @@ public class KaoQinUrlModel {
 
     public void setEndTime(String endTime) {
         this.endTime = endTime;
-    }
-
-    public String getURL() {
-        return host+URL;
-    }
-
-    public void setURL(String URL) {
-        this.URL = URL;
-    }
-
-    public String getUserInfoTargetUrl() {
-        return host+userInfoTargetUrl;
-    }
-
-    public void setUserInfoTargetUrl(String userInfoTargetUrl) {
-        this.userInfoTargetUrl = userInfoTargetUrl;
-    }
-
-    public String getDataTargetUrl() {
-        return host+dataTargetUrl;
-    }
-
-    public void setDataTargetUrl(String dataTargetUrl) {
-        this.dataTargetUrl = dataTargetUrl;
     }
 }

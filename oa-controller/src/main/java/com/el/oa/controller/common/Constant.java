@@ -1,12 +1,4 @@
-package com.el.oa.logic;
-
-import com.el.oa.domain.kaoqi.KaoQinRecord;
-import com.el.oa.domain.kaoqi.SignDayRecord;
-import com.el.oa.domain.kaoqi.SignRecord;
-import com.el.oa.fetch.model.KaoQinUrlModel;
-
-import java.util.List;
-import java.util.Map;
+package com.el.oa.controller.common;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -32,16 +24,10 @@ import java.util.Map;
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  *
  * @User : Hapic
- * @Date : 2016/7/25 20:27
+ * @Date : 2016/7/28 20:25
  */
-public interface IKaoQinDataFetch {
-    void fetchAndSaveSignRecord(Integer userName, String password);
+public interface Constant {
+    String USER="user";
+    String URLMODEL="urlModel";
 
-    void fetchAndSaveSignRecord(Integer userName, String password, KaoQinUrlModel model);
-
-    String lastInpointDate(Integer userName);
-
-    List<SignRecord> loadSingRecordByTime(Integer userName, String startTime, String endTime);
-
-    List<SignDayRecord> loadJiabanSignDayRecord(Integer userName, String startTime, String endTime);
 }

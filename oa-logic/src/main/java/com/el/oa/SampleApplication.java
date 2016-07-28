@@ -36,10 +36,10 @@ import java.util.Set;
  * @User : Hapic
  * @Date : 2016/7/25 20:39
  */
-@SpringBootApplication(scanBasePackages = {"com.el.oa"})
+//@SpringBootApplication(scanBasePackages = {"com.el.oa"})
 public class SampleApplication {
 
-    public static void main(String[] args) {
+    public static void maisn(String[] args) {
 
         SpringApplication app = new SpringApplication(SampleApplication.class);
         app.setWebEnvironment(true);

@@ -1,12 +1,11 @@
-package com.el.oa.logic;
+package com.el.oa.controller.common;
 
-import com.el.oa.domain.kaoqi.KaoQinRecord;
-import com.el.oa.domain.kaoqi.SignDayRecord;
-import com.el.oa.domain.kaoqi.SignRecord;
-import com.el.oa.fetch.model.KaoQinUrlModel;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -32,16 +31,25 @@ import java.util.Map;
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  *
  * @User : Hapic
- * @Date : 2016/7/25 20:27
  */
-public interface IKaoQinDataFetch {
-    void fetchAndSaveSignRecord(Integer userName, String password);
+public class BaseController {
 
-    void fetchAndSaveSignRecord(Integer userName, String password, KaoQinUrlModel model);
 
-    String lastInpointDate(Integer userName);
 
-    List<SignRecord> loadSingRecordByTime(Integer userName, String startTime, String endTime);
 
-    List<SignDayRecord> loadJiabanSignDayRecord(Integer userName, String startTime, String endTime);
+    public HttpSession getSession() {
+        HttpSession session = null;
+        try {
+            session = getRequest().getSession();
+        } catch (Exception e) {}
+        return session;
+    }
+
+
+    public HttpServletRequest getRequest() {
+        ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder
+                .getRequestAttributes();
+        return attrs.getRequest();
+    }
+
 }
