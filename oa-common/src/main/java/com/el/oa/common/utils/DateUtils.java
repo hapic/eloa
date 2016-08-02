@@ -66,6 +66,19 @@ public class DateUtils {
         return sf.format(calendar.getTime());
     }
 
+    /**
+     * 将一个十位整形数字转换为日期格式 年-月-日
+     *
+     * @param date
+     * @return
+     */
+    public static String intToStringDateByDay(int date) {
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(date * 1000L);
+        return sf.format(calendar.getTime());
+    }
+
     public static int jiaban(String time){
         try {
             String[] split = time.split(" ");
@@ -91,12 +104,67 @@ public class DateUtils {
         return 0;
     }
 
+    /**
+     * 获取当天开始时间
+     */
+    public static Integer getCurrentdate(int date){
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(date * 1000L);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        return (int) (cal.getTimeInMillis() / 1000);
+    }
+
+    /**
+     * 根据给予的月份计算该月的开始时间
+     */
+    public static int getMonthStartDate(int date){
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(date * 1000L);
+//        cal.set(Calendar.MONTH, cal.get(Calendar.MONTH) + 1);
+        cal.set(Calendar.MONTH,cal.get(Calendar.MONTH));
+        cal.set(Calendar.DATE, 1);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+
+        return (int) (cal.getTimeInMillis() / 1000);
+    }
+
+    /**
+     * 根据给予的时间计算该月的结束时间
+     *
+     * @param date
+     * @return
+     */
+    public static Integer getMonthEndDate(Integer date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(date * 1000L);
+        cal.set(Calendar.MONTH, cal.get(Calendar.MONTH) + 1);
+        cal.set(Calendar.DATE, 1);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+
+        return (int) (cal.getTimeInMillis() / 1000)-1;
+    }
+
+    /**
+     * 获取以毫秒为单位的当前时间。保留10位
+     *
+     * @return
+     */
+    public static int getCurrentTime() {
+        return (int) (System.currentTimeMillis() / 1000);
+    }
+
+
     public static void main(String[] args) {
 
 
         try {
-            System.out.println(chidao("2016-07-06 09:09:06"));
-            System.out.println(jiaban("2016-07-06 22:12:09"));
+            System.out.println(getMonthEndDate(getCurrentTime()));
         } catch (Exception e) {
             e.printStackTrace();
         }

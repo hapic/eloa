@@ -22,10 +22,5 @@
             <artifactId>oa-model</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.el.oa</groupId>
-            <artifactId>oa-mapper</artifactId>
-            <version>${project.version}</version>
-        </dependency>
     </dependencies>
 </project>

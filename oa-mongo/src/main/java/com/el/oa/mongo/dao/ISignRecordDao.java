@@ -35,7 +35,7 @@ import java.util.List;
 public interface ISignRecordDao<SignRecord> extends MongoBase<SignRecord> {
 
 
-    void addRecord(Criteria var1, List<String> var2, String var3);
+    void addRecord(Criteria var1, List<SignRecord> var2, String var3);
 
     List<SignRecord> find(Criteria var1, String var2);
 }

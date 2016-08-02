@@ -1,5 +1,6 @@
 package com.el.oa.mongo.dao;
 
+import com.el.oa.domain.kaoqi.SignDayRecord;
 import com.el.oa.mongo.dao.base.MongoBase;
 import org.springframework.data.mongodb.core.query.Criteria;
 
@@ -34,7 +35,7 @@ import java.util.List;
 public interface ISignDayRecordDao<SignDayRecord> extends MongoBase<SignDayRecord> {
 
 
-    void addRecord(Criteria var1, List<String> var2, String var3);
+    void addRecord(Criteria var1, List<SignDayRecord> var2, String var3);
 
     List<SignDayRecord> find(Criteria var1, String var2);
 }

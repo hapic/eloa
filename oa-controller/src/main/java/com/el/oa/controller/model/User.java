@@ -32,6 +32,7 @@ public class User {
     private String host="http://124.65.191.70:10000";
     private String URL = "/iclock/accounts/login/";
 
+
     public String getUserName() {
         return userName;
     }

@@ -1,10 +1,12 @@
 package com.el.oa.controller;
 
+import com.el.oa.common.utils.DateUtils;
 import com.el.oa.controller.common.BaseController;
 import com.el.oa.controller.common.Constant;
 import com.el.oa.controller.model.RuleModel;
 import com.el.oa.controller.model.User;
 import com.el.oa.domain.kaoqi.KaoQinRecord;
+import com.el.oa.domain.kaoqi.SignDayRecord;
 import com.el.oa.fetch.ProwlerHelper;
 import com.el.oa.fetch.model.KaoQinUrlModel;
 import com.el.oa.logic.IKaoQinDataFetch;
@@ -13,7 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -51,7 +55,7 @@ public class KaoQinRecordController extends BaseController{
 
 
     @RequestMapping("login")
-    public String login(User user){
+    public String login(final User user){
 //        getSession().setAttribute("userName",model.getUserName());
         Map<String,String> params= new HashMap<String, String>();
         params.put("username",user.getUserName());
@@ -63,13 +67,27 @@ public class KaoQinRecordController extends BaseController{
         if(cookie!=null){
             getSession().setAttribute(Constant.USER,user);
 
-            KaoQinUrlModel kaoQinRecord;
+            final KaoQinUrlModel kaoQinRecord;
             if(null == user.getHost()){
                 kaoQinRecord=new KaoQinUrlModel();
             }else
                 kaoQinRecord=new KaoQinUrlModel(user.getHost());
 
+            String s = kaoQinDataFetch.lastInpointDate(Integer.parseInt(user.getUserName()));
+            if(s!=null){
+                kaoQinRecord.setStartTime(s);
+            }
+
             getSession().setAttribute(Constant.URLMODEL,kaoQinRecord);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+
+                    kaoQinDataFetch.fetchAndSaveSignRecord(Integer.parseInt(user.getUserName()),user.getPassword(),kaoQinRecord);
+                }
+            }).start();
+
+
             return "success";
         }
         return "pwdError";
@@ -84,11 +102,24 @@ public class KaoQinRecordController extends BaseController{
         User user= (User)attribute;
 
         KaoQinUrlModel kaoQinUrlModel = (KaoQinUrlModel)getSession().getAttribute(Constant.URLMODEL);
+        kaoQinUrlModel.setStartTime(model.getStartTime());
+        kaoQinUrlModel.setEndTime(model.getEndTime());
+        getSession().setAttribute(Constant.URLMODEL,kaoQinUrlModel);
         kaoQinDataFetch.fetchAndSaveSignRecord(Integer.parseInt(user.getUserName()),user.getPassword(),kaoQinUrlModel);
 
 
 
         return null;
+    }
+
+    @RequestMapping("jiaban")
+    public List<SignDayRecord>  jiaBan(){
+        Object attribute = getSession().getAttribute(Constant.USER);
+        User user= (User)attribute;
+        String startDate=DateUtils.intToStringDateByDay(DateUtils.getMonthStartDate(DateUtils.getCurrentTime()));
+        String endDate=DateUtils.intToStringDateByDay(DateUtils.getMonthEndDate(DateUtils.getCurrentTime()));
+
+        return kaoQinDataFetch.loadJiabanSignDayRecord(Integer.parseInt(user.getUserName()),startDate ,endDate);
     }
 
 

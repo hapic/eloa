@@ -1,9 +1,4 @@
-package com.el.oa.iservice.kaoqin;
-
-import com.el.oa.domain.kaoqi.SignDayRecord;
-import com.el.oa.domain.kaoqi.SignRecord;
-
-import java.util.List;
+package com.el.oa;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -29,20 +24,7 @@ import java.util.List;
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  *
  * @User : Hapic
- * @Date : 2016/7/28 20:39
+ * @Date : 2016/8/2 20:05
  */
-public interface IKaoQinDataService {
-
-    void saveSignRecord(SignRecord sr);
-
-    void saveSignDayRecord(SignDayRecord sdr);
-
-
-    List<SignRecord> loadSingRecordByTime(Integer userName, String startTime, String endTime);
-
-    List<SignDayRecord> loadJiabanSignDayRecord(Integer userName, String startTime, String endTime);
-
-    String lastInpointDate(Integer userName);
-
-    void pointDate(Integer userName);
+public class TestOne {
 }

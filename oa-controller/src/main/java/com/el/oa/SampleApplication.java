@@ -1,4 +1,4 @@
-package com.el.oa.logic;
+package com.el.oa;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -45,9 +45,9 @@ public class SampleApplication {
         app.setWebEnvironment(true);
 //        app.setShowBanner(false);
 
-        Set<Object> set = new HashSet<Object>();
-//        set.add("classpath:applicationContext.xml");
-        app.setSources(set);
+//        Set<Object> set = new HashSet<Object>();
+////        set.add("classpath:applicationContext.xml");
+//        app.setSources(set);
         app.run(args);
     }
 }

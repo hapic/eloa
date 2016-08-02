@@ -44,7 +44,7 @@ public class SignDayRecordDaoImpl extends MongoBaseImpl<SignDayRecord> implement
         super(SignDayRecord.class);
     }
 
-    public void addRecord(Criteria criteria, List<String> logs, String collectionName) {
+    public void addRecord(Criteria criteria, List<SignDayRecord> logs, String collectionName) {
         Update upd = new Update();
         upd.pushAll("content", logs.toArray());
         this.mongo.updateMulti(new Query(criteria), upd, SignDayRecord.class, collectionName);

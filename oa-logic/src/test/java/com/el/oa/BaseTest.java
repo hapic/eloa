@@ -1,6 +1,5 @@
 package com.el.oa;
 
-import com.el.oa.logic.SampleApplication;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -32,7 +31,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @Date : 2016/6/14 9:07
  */
 @RunWith(SpringJUnit4ClassRunner.class) // SpringJUnit支持，由此引入Spring-Test框架支持！
-@SpringApplicationConfiguration(classes = SampleApplication.class)
+//@SpringApplicationConfiguration(classes = SampleApplication.class)
 public class BaseTest {
 
 }

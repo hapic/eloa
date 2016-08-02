@@ -23,11 +23,6 @@
         </dependency>
         <dependency>
             <groupId>com.el.oa</groupId>
-            <artifactId>oa-mapper</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.el.oa</groupId>
             <artifactId>oa-iservice</artifactId>
             <version>${project.version}</version>
         </dependency>

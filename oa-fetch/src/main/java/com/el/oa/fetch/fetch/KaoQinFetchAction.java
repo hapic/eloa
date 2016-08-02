@@ -99,10 +99,10 @@ public class KaoQinFetchAction implements FetchAction {
                 .replaceAll("&UserID__id__exact=", "&UserID__id__exact=" + uid)
                 .replaceAll("\\?p=", "?p=" + page);
         if(model.getStartTime()!=null){
-            url.replaceAll("&fromTime=","&fromTime="+model.getStartTime());
+            url= url.replaceAll("&fromTime=","&fromTime="+model.getStartTime().split(" ")[0]);
         }
         if(model.getEndTime()!=null){
-            url.replaceAll("&toTime=","&toTime="+model.getEndTime());
+            url= url.replaceAll("&toTime=","&toTime="+model.getEndTime().split(" ")[0]);
         }
         Spider.create(new KaoQinRecordFetchPageProcessor(cookie))
                 .addUrl(url)

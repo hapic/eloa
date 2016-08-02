@@ -1,14 +1,9 @@
-package com.el.oa.logic;
+package com.el.oa.service.kaoqin;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.scheduling.annotation.EnableScheduling;
+import com.el.oa.domain.kaoqi.SignDayRecord;
+import com.el.oa.domain.kaoqi.SignRecord;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -34,20 +29,24 @@ import java.util.Set;
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  *
  * @User : Hapic
- * @Date : 2016/7/25 20:39
+ * @Date : 2016/7/28 20:39
  */
-//@SpringBootApplication(scanBasePackages = {"com.el.oa"})
-public class SampleApplication {
+public interface IKaoQinDataService {
 
-    public static void maisn(String[] args) {
+    void saveSignRecord(SignRecord sr);
 
-        SpringApplication app = new SpringApplication(SampleApplication.class);
-        app.setWebEnvironment(true);
-//        app.setShowBanner(false);
+    void saveSignRecord(String userName, List<SignRecord> signRecords);
 
-        Set<Object> set = new HashSet<Object>();
-//        set.add("classpath:applicationContext.xml");
-        app.setSources(set);
-        app.run(args);
-    }
+    void saveSignDayRecord(SignDayRecord sdr);
+
+
+    void saveSignDayRecord(String userName, List<SignDayRecord> signDayRecords);
+
+    List<SignRecord> loadSingRecordByTime(Integer userName, String startTime, String endTime);
+
+    List<SignDayRecord> loadJiabanSignDayRecord(Integer userName, String startTime, String endTime);
+
+    String lastInpointDate(Integer userName);
+
+    void pointDate(Integer userName);
 }

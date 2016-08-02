@@ -11,7 +11,6 @@
     <modules>
         <module>oa-common</module>
         <module>oa-model</module>
-        <module>oa-mapper</module>
         <module>oa-service</module>
         <module>oa-logic</module>
         <module>oa-controller</module>
