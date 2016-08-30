@@ -1,4 +1,4 @@
-package com.el.oa.controller.common;
+package com.el.oa.common;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -24,11 +24,8 @@ package com.el.oa.controller.common;
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  *
  * @User : Hapic
- * @Date : 2016/7/28 20:25
+ * @Date : 2016/8/30 8:20
  */
 public interface Constant {
-    String USER="user";
-    String URLMODEL="urlModel";
-
-
+    Integer JBSCALE=1;//加班计时
 }

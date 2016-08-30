@@ -1,5 +1,6 @@
 package com.el.oa.service.kaoqin;
 
+import com.el.oa.common.Constant;
 import com.el.oa.common.utils.DateUtils;
 import com.el.oa.domain.kaoqi.LastPoint;
 import com.el.oa.domain.kaoqi.SignDayRecord;
@@ -92,7 +93,7 @@ public class KaoQinDataServiceImpl implements IKaoQinDataService {
 
     @Override
     public List<SignDayRecord> loadJiabanSignDayRecord(Integer userName, String startTime, String endTime) {
-        Criteria criteria= Criteria.where("jiaban").gte(2*60);
+        Criteria criteria= Criteria.where("jiaban").gte(Constant.JBSCALE*60);
         Criteria day = Criteria.where("day").gte(startTime).lte(endTime).andOperator(criteria);
         return signDayRecordDao.find(day, "signDayRecord_" + userName);
     }

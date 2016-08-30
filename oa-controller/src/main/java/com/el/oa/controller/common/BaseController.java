@@ -1,5 +1,6 @@
 package com.el.oa.controller.common;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -34,9 +35,6 @@ import javax.servlet.http.HttpSession;
  */
 public class BaseController {
 
-
-
-
     public HttpSession getSession() {
         HttpSession session = null;
         try {
@@ -50,6 +48,13 @@ public class BaseController {
         ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder
                 .getRequestAttributes();
         return attrs.getRequest();
+    }
+
+
+    public JSONObject buildResult(Object result){
+        JSONObject jsonObject=new JSONObject();
+        jsonObject.put("data",result);
+        return jsonObject;
     }
 
 }
