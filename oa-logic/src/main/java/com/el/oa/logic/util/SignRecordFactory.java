@@ -62,6 +62,7 @@ public class SignRecordFactory {
         Iterator<String> iterator = strings.iterator();
         Integer signId=signRecords.get(0).getSignId();//打卡id
         Integer uid=signRecords.get(0).getUid();//用户id
+        String realName=signRecords.get(0).getName();//员工名称
         while(iterator.hasNext()){
             String day = iterator.next();
             List<String> signTimeList = map.get(day);
@@ -69,9 +70,10 @@ public class SignRecordFactory {
             Collections.sort(signTimeList, new StrindDateComparator());
             String on = signTimeList.get(0);//上班时间
             String off = signTimeList.get(signTimeList.size()-1);//上班时间
-            SignDayRecord sdr= new SignDayRecord(signId,uid,day,on,off);
+            SignDayRecord sdr= new SignDayRecord(signId,uid,realName,day,on,off);
             sdr.setJiaban(DateUtils.jiaban(off));//加班时间
             sdr.setChidao(DateUtils.chidao(on));//迟到时间
+            sdr.setWeek(DateUtils.isWeek(day));//是否为周末
             signDayRecordList.add(sdr);
         }
 

@@ -99,6 +99,12 @@ public class KaoQinDataServiceImpl implements IKaoQinDataService {
     }
 
     @Override
+    public List<SignDayRecord> loadWeekSignDayRecord(Integer userName, String startTime, String endTime) {
+        Criteria criteria= Criteria.where("week").exists(true);
+        return signDayRecordDao.find(criteria, "signDayRecord_" + userName);
+    }
+
+    @Override
     public String lastInpointDate(Integer userName) {
         Criteria criteria= Criteria.where("signId").is(userName);
         LastPoint point = lastPointDao.findOne(criteria, LastPoint.class.getSimpleName());

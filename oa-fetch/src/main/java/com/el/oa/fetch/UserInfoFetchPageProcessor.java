@@ -1,5 +1,6 @@
 package com.el.oa.fetch;
 
+import com.el.oa.common.utils.HTMLSpirit;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
@@ -47,8 +48,11 @@ public class UserInfoFetchPageProcessor implements PageProcessor {
                 .regex("uid=\"\\d*\"")
                 .replace("\"","")
                 .toString().split("=")[1];
+        String nameStr = page.getHtml().regex("<strong>员工 [\\u4e00-\\u9fa5]*</strong>").replace("员工 ", "").toString();
+        String realName= HTMLSpirit.delHTMLTag(nameStr);
 
         page.putField("uid", Integer.parseInt(s));
+        page.putField("realName", realName);
     }
 
     @Override

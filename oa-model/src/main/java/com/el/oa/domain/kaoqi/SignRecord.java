@@ -33,6 +33,7 @@ public class SignRecord implements Serializable{
 
     private Integer signId;//打卡id
     private Integer uid;//用户id
+    private String name;
     private String date;//打卡时间
     private String target;//打卡目的
     private String type;//打卡方式
@@ -87,11 +88,21 @@ public class SignRecord implements Serializable{
         this.date = date;
     }
 
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "SignRecord{" +
                 "signId=" + signId +
                 ", uid=" + uid +
+                ", name='" + name + '\'' +
                 ", date='" + date + '\'' +
                 ", target='" + target + '\'' +
                 ", type='" + type + '\'' +

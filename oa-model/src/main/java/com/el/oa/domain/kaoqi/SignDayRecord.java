@@ -32,16 +32,20 @@ public class SignDayRecord implements Serializable{
 
     private Integer signId;//打卡id
     private Integer uid;//用户id
+    private String realName;
     private String day;//日期
     private String onDuty;//上班时间
     private String offDuty;//下班时间
     private int jiaban;//以分钟为单位
     private int chidao;//以分钟为单位
+    private boolean week;//是否为周末
 
-    public SignDayRecord(Integer signId, Integer uid, String day, String onDuty, String offDuty) {
+    public SignDayRecord(Integer signId, Integer uid,String realName, String day,
+                         String onDuty, String offDuty) {
         this.signId = signId;
         this.uid = uid;
         this.day = day;
+        this.realName=realName;
         this.onDuty = onDuty;
         this.offDuty = offDuty;
 
@@ -103,11 +107,30 @@ public class SignDayRecord implements Serializable{
         this.chidao = chidao;
     }
 
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+
+    public boolean isWeek() {
+        return week;
+    }
+
+    public void setWeek(boolean week) {
+        this.week = week;
+    }
+
     @Override
     public String toString() {
         return "SignDayRecord{" +
                 "signId=" + signId +
                 ", uid=" + uid +
+                ", realName='" + realName + '\'' +
                 ", day='" + day + '\'' +
                 ", onDuty='" + onDuty + '\'' +
                 ", offDuty='" + offDuty + '\'' +

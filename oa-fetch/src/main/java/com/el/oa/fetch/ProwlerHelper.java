@@ -140,7 +140,7 @@ public class ProwlerHelper {
 
         Map<String,String> params= new HashMap<String, String>();
         params.put("username","30005");
-        params.put("password","30004");
+        params.put("password","30005");
         ProwlerHelper prowlerHelper= new ProwlerHelper(model.getURL(),params);
         String cookie = prowlerHelper.login().cookie();
         System.out.println(cookie);

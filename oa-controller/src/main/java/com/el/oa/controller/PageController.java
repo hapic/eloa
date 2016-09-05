@@ -1,5 +1,6 @@
 package com.el.oa.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,5 +39,10 @@ public class PageController {
     @RequestMapping("login")
     public ModelAndView login(){
         return new ModelAndView("login/index");
+    }
+
+    @RequestMapping("download")
+    public ModelAndView download(){
+        return new ModelAndView("data/index");
     }
 }

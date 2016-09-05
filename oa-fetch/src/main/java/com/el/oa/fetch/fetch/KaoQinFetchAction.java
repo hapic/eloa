@@ -66,7 +66,9 @@ public class KaoQinFetchAction implements FetchAction {
                 .run();
 
         Object uid = consolePipeline.getResult().get("uid");
+        Object realName = consolePipeline.getResult().get("realName");
         map.put("uid",uid);
+        map.put("realName",realName);
 
 
         //开始第一次抓取工作

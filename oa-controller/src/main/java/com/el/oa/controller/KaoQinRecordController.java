@@ -6,6 +6,7 @@ import com.el.oa.controller.common.BaseController;
 import com.el.oa.controller.common.Constant;
 import com.el.oa.controller.model.RuleModel;
 import com.el.oa.controller.model.User;
+import com.el.oa.document.CreateDocuments;
 import com.el.oa.domain.kaoqi.SignDayRecord;
 import com.el.oa.fetch.ProwlerHelper;
 import com.el.oa.fetch.model.KaoQinUrlModel;
@@ -19,9 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -167,6 +166,48 @@ public class KaoQinRecordController extends BaseController{
         }
 //        JSONObject resultJson=new JSONObject();
 //        return buildResult(listResult);
+
+    }
+
+    @RequestMapping("downLoad")
+    public void downLoadData(String time,String signIds){
+
+        String[] uids =signIds.split(",");
+
+        Integer tim= null;
+        try {
+            tim = DateUtils.stringDateToInt2(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String startDate=DateUtils.intToStringDateByDay(DateUtils.getMonthStartDate(tim));
+
+        String endDate=DateUtils.intToStringDateByDay(DateUtils.getMonthEndDate(tim));
+
+
+        List<SignDayRecord> allSignDayRecord=new ArrayList<SignDayRecord>();
+        for(String uid:uids){
+            List<SignDayRecord> listResult=kaoQinDataFetch.loadJiabanSignDayRecord(Integer.parseInt(uid),startDate ,endDate);
+            allSignDayRecord.addAll(listResult);
+        }
+
+
+        String[][] datas=new String[allSignDayRecord.size()][6];
+        //{{"6月5日","星期二","张胜","25","0","25"},{"6月5日","星期二","张胜","25","0","25"}};
+        for(int i=0;i<allSignDayRecord.size();i++){
+            SignDayRecord sr=allSignDayRecord.get(i);
+            datas[i][0]=DateUtils.yueRi(sr.getDay());
+            datas[i][1]= DateUtils.getWeekOfDate(sr.getDay());
+            datas[i][2]=sr.getRealName();
+            datas[i][3]="25";
+            datas[i][4]="0";
+            datas[i][5]="25";
+        }
+
+        String filePath = CreateDocuments.buildMingmi(time, "信息技术部门  基础服务组", datas);
+
+        System.out.println(filePath);
+
 
     }
 

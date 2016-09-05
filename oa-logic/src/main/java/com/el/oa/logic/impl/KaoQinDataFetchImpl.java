@@ -113,8 +113,21 @@ public class KaoQinDataFetchImpl implements IKaoQinDataFetch {
      */
     @Override
     public List<SignDayRecord> loadJiabanSignDayRecord(Integer userName, String startTime, String endTime){
-       return kaoQinDataService.loadJiabanSignDayRecord(userName,startTime,endTime);
+        List<SignDayRecord> list= new ArrayList<SignDayRecord>();
+        //加载周末加班记录
+//        List<SignDayRecord> signDayRecords = kaoQinDataService.loadWeekSignDayRecord(userName, startTime, endTime);
+//        list.addAll(signDayRecords);
+        //加载平时加班记录
+        List<SignDayRecord> signDayRecords1 = kaoQinDataService.loadJiabanSignDayRecord(userName, startTime, endTime);
+        list.addAll(signDayRecords1);
+
+        return list;
     }
+
+
+
+
+
 
 
 

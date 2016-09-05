@@ -62,6 +62,8 @@ public class SignRecordUtil {
         Map fetchResult = prowlerHelper.fetch(cookie,model, new KaoQinFetchAction());
         Integer uid = (Integer)fetchResult.get("uid");
         String data = (String)fetchResult.get("data");
+        String realName = (String)fetchResult.get("realName");
+
 
         Reader reader = new StringReader(data);
         BufferedReader br = new BufferedReader(reader);
@@ -80,6 +82,7 @@ public class SignRecordUtil {
                         signRecord.setUid(uid);
                         signRecord.setSignId(signId);
                         signRecord.setDate(trim);
+                        signRecord.setName(realName);
                         /*try {
                             int time = DateUtils.stringDateToInt(trim);
                             signRecord.setDate(time+"");

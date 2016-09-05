@@ -23,6 +23,11 @@
             <version>${oa-model.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.el.oa</groupId>
+            <artifactId>oa-document</artifactId>
+            <version>${oa-model.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>

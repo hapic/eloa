@@ -46,6 +46,8 @@ public interface IKaoQinDataService {
 
     List<SignDayRecord> loadJiabanSignDayRecord(Integer userName, String startTime, String endTime);
 
+    List<SignDayRecord> loadWeekSignDayRecord(Integer userName, String startTime, String endTime);
+
     String lastInpointDate(Integer userName);
 
     void pointDate(Integer userName);

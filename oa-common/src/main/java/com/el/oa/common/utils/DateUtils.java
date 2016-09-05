@@ -167,10 +167,61 @@ public class DateUtils {
     }
 
 
+
+    public static String getWeekOfDate(String day) {
+        String[] weekDays = new String[7];
+        int w = 0;
+        try {
+
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = sf.parse(day);
+
+            weekDays = new String[]{"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            w = cal.get(Calendar.DAY_OF_WEEK) - 1;
+            if (w < 0)
+                w = 0;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return weekDays[w];
+    }
+
+    /**
+     * 判断是否为周末
+     * @param day
+     * @return
+     */
+    public static boolean isWeek(String day){
+        return getWeekOfDate(day).contains("日") || getWeekOfDate(day).contains("六");
+    }
+
+
+
+
+    public static String yueRi(String day){
+        return day.substring(day.indexOf("-")+1);
+    }
+
+
+    public static String da(int num){
+
+        String[] str={"零","一","二","三","四","五","六","七","八","九","十"};
+
+        if(num>str.length-1){
+            return "";
+        }
+        return str[num];
+    }
+
+
     public static void main(String[] args) {
 
 
         try {
+            System.out.println(da(11));
+            System.out.println(getWeekOfDate("2016-08-29"));
             System.out.println(getMonthEndDate(getCurrentTime()));
         } catch (Exception e) {
             e.printStackTrace();
