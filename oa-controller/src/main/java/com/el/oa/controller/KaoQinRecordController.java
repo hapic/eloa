@@ -6,13 +6,19 @@ import com.el.oa.controller.common.BaseController;
 import com.el.oa.controller.common.Constant;
 import com.el.oa.controller.model.RuleModel;
 import com.el.oa.controller.model.User;
+import com.el.oa.domain.kaoqi.SignDayRecord;
 import com.el.oa.fetch.ProwlerHelper;
 import com.el.oa.fetch.model.KaoQinUrlModel;
 import com.el.oa.logic.IKaoQinDataFetch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,8 +57,9 @@ public class KaoQinRecordController extends BaseController{
     private IKaoQinDataFetch kaoQinDataFetch;
 
 
+
     @RequestMapping("login")
-    public JSONObject login(final User user){
+    public ModelAndView login(final User user,HttpServletResponse response){
 //        getSession().setAttribute("userName",model.getUserName());
         Map<String,String> params= new HashMap<String, String>();
         params.put("username",user.getUserName());
@@ -60,7 +67,7 @@ public class KaoQinRecordController extends BaseController{
 
         ProwlerHelper prowlerHelper= new ProwlerHelper(user.getURL(),params);
         String cookie = prowlerHelper.login().cookie();
-
+        Map<String,String> map= new HashMap<String, String>();
         if(cookie!=null){
             getSession().setAttribute(Constant.USER,user);
 
@@ -76,18 +83,25 @@ public class KaoQinRecordController extends BaseController{
             }
 
             getSession().setAttribute(Constant.URLMODEL,kaoQinRecord);
-            new Thread(new Runnable() {
+            /*new Thread(new Runnable() {
                 @Override
                 public void run() {
 
                     kaoQinDataFetch.fetchAndSaveSignRecord(Integer.parseInt(user.getUserName()),user.getPassword(),kaoQinRecord);
                 }
-            }).start();
+            }).start();*/
 
 
-            return buildResult("success");
+//            return buildResult("success");
+            map.put("tip","登陆成功");
+
+            return new ModelAndView("home/index");
         }
-        return buildResult("pwdError") ;
+//        return buildResult("pwdError") ;
+
+        map.put("userName",user.getUserName());
+        map.put("tip","密码错误");
+        return new ModelAndView("login/index","data",map);
     }
 
     @RequestMapping("fetch")
@@ -121,6 +135,40 @@ public class KaoQinRecordController extends BaseController{
         return buildResult(listResult);
 
     }
+
+
+    @RequestMapping("jiaban2")
+    public void  jiaBan2(String time,HttpServletResponse response){
+        Object attribute = getSession().getAttribute(Constant.USER);
+        User user= (User)attribute;
+        Integer tim= null;
+        try {
+            tim = DateUtils.stringDateToInt2(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String startDate=DateUtils.intToStringDateByDay(DateUtils.getMonthStartDate(tim));
+
+        String endDate=DateUtils.intToStringDateByDay(DateUtils.getMonthEndDate(tim));
+
+        List<SignDayRecord> listResult=kaoQinDataFetch.loadJiabanSignDayRecord(Integer.parseInt(user.getUserName()),startDate ,endDate);
+        response.setContentType("text/html");
+        PrintWriter out = null;
+        try {
+            out = response.getWriter();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for(SignDayRecord sdr:listResult){
+                out.print(sdr.getDay()+"  "+sdr.getOffDuty()+"  "+sdr.getJiaban()+"<br/>");
+
+        }
+//        JSONObject resultJson=new JSONObject();
+//        return buildResult(listResult);
+
+    }
+
 
 
 

@@ -8,7 +8,7 @@ import java.util.Map;
 public class TestTemplate {
 	public static void main(String[] args) {
 		ExcelTemplate excel = ExcelTemplate.getInstance().readTemplatePath(
-				"D:/poitemple/template.xls");
+				"D:/poitemple/templates.xls");
 		excel.creatNewRow();
 		excel.createNewCol("aaa");
 		excel.createNewCol("111");

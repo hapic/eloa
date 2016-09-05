@@ -47,6 +47,13 @@ public class DateUtils {
         return (int) (date.getTime() / 1000);
     }
 
+    public static int stringDateToInt2(String sdate) throws ParseException {
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM");
+        Date date = sf.parse(sdate);
+        return (int) (date.getTime() / 1000);
+    }
+
+
     public static int stringDayToInt(String sdate) throws ParseException {
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = sf.parse(sdate);

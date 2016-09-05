@@ -1,13 +1,9 @@
-package com.el.oa.controller.common;
+package com.el.oa.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.sun.xml.internal.ws.client.ResponseContext;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓+ +
@@ -33,31 +29,14 @@ import javax.servlet.http.HttpSession;
  * 　　　　　　　　　　┗┻┛　┗┻┛+ + + +
  *
  * @User : Hapic
+ * @Date : 2016/8/31 18:28
  */
-public class BaseController {
+@Controller
+@RequestMapping(value="/v")
+public class PageController {
 
-    public HttpSession getSession() {
-        HttpSession session = null;
-        try {
-            session = getRequest().getSession();
-        } catch (Exception e) {}
-        return session;
+    @RequestMapping("login")
+    public ModelAndView login(){
+        return new ModelAndView("login/index");
     }
-
-
-    public HttpServletRequest getRequest() {
-        ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder
-                .getRequestAttributes();
-        return attrs.getRequest();
-    }
-
-
-
-
-    public JSONObject buildResult(Object result){
-        JSONObject jsonObject=new JSONObject();
-        jsonObject.put("data",result);
-        return jsonObject;
-    }
-
 }
