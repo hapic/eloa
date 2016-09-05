@@ -95,7 +95,8 @@ public class KaoQinRecordController extends BaseController{
 //            return buildResult("success");
             map.put("tip","登陆成功");
 
-            return new ModelAndView("home/index");
+
+            return new ModelAndView("home/index","data",map);
         }
 //        return buildResult("pwdError") ;
 
