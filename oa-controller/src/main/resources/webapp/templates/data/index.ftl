@@ -7,8 +7,8 @@
 <body>
 
 <form action="/kq/downLoad" method="get">
-    <input type="text" name="time"/>
-    <input type="text" name="signIds"/>
+    时间：<input type="text" name="time"/><br/>
+    签到号：<input type="text"  name="signIds"/><br/>
     <input type="submit" value="下载" />
 </form>
 

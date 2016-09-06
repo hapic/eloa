@@ -170,7 +170,7 @@ public class KaoQinRecordController extends BaseController{
     }
 
     @RequestMapping("downLoad")
-    public void downLoadData(String time,String signIds){
+    public void downLoadData(String time,String signIds,HttpServletResponse response){
 
         String[] uids =signIds.split(",");
 
@@ -207,6 +207,13 @@ public class KaoQinRecordController extends BaseController{
         String filePath = CreateDocuments.buildMingmi(time, "信息技术部门  基础服务组", datas);
 
         System.out.println(filePath);
+        try {
+
+            response.setContentType("text/html");
+            response.getWriter().write(filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
     }
