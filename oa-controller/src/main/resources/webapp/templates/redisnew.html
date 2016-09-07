@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>redis查询</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+
+
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+
+
+</head>
+<body>
+
+
+
+
+</body>
+<script type="text/javascript">
+    $("#selectButton").unbind("click");
+    $("#selectButton").bind("click",function(){
+        var ip=$("#ip").val();
+        var port=$("#port").val();
+        var db=$("#db").val();
+        var type=$("#type").val();
+        var key=$("#key").val();
+        var data={
+            ip:ip,
+            port:port,
+            db:db,
+            type:type,
+            key:key
+        };
+
+        $.ajax({
+            type: "post",
+            url: "redis_tools",
+            data: data,
+            success: function(msg){
+               $("#result").text(msg)
+                $("#showbox").alert();
+            }
+        });
+    })
+
+
+</script>
+</html>

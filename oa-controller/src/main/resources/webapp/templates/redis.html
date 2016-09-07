@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>redis查询</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href="assets/css/lib/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/lib/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="assets/css/custom.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+
+
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+
+
+</head>
+<body>
+
+<form class="form-horizontal">
+    <fieldset>
+        <div id="legend" class="">
+            <legend class="">redis查询</legend>
+        </div>
+
+        <div class="control-group">
+
+            <!-- Text input-->
+            <label class="control-label" for="ip">IP</label>
+            <div class="controls">
+                <input type="text" id="ip" placeholder="redis的IP地址" class="input-xlarge">
+                <p class="help-block"></p>
+            </div>
+        </div>
+
+        <div class="control-group">
+
+            <!-- Text input-->
+            <label class="control-label" for="port">port</label>
+            <div class="controls">
+                <input type="text" id="port" placeholder="查询redis的端口" class="input-xlarge">
+                <p class="help-block"></p>
+            </div>
+        </div><div class="control-group">
+
+        <!-- Text input-->
+        <label class="control-label" for="db">db</label>
+        <div class="controls">
+            <input type="text" id="db" placeholder="redis的索引库"  class="input-xlarge">
+            <p class="help-block"></p>
+        </div>
+    </div><div class="control-group">
+
+        <!-- Select Basic -->
+        <label class="control-label">type</label>
+        <div class="controls">
+            <select class="input-xlarge" id="type">
+                <option>exists</option>
+                <option>type</option>
+                <option>ttl</option>
+                <option>get</option></select>
+        </div>
+
+    </div><div class="control-group">
+
+        <!-- Text input-->
+        <label class="control-label" for="key">key</label>
+        <div class="controls">
+            <input type="text" id="key"  placeholder="查询的key" class="input-xlarge">
+            <p class="help-block">如果是get则只支持string类型的结构</p>
+        </div>
+    </div><div class="control-group">
+        <label class="control-label"></label>
+
+        <!-- Button -->
+        <div class="controls">
+            <button class="btn btn-success" type="button" id="selectButton">查询</button>
+        </div>
+    </div>
+
+    </fieldset>
+</form>
+
+<div class="alert alert-success close" id="showbox">
+    <a href="#" class="close" data-dismiss="alert">
+        &times;
+    </a>
+    <div id="result">
+
+    </div>
+
+</div>
+
+
+
+
+</body>
+<script type="text/javascript">
+    $("#selectButton").unbind("click");
+    $("#selectButton").bind("click",function(){
+        var ip=$("#ip").val();
+        var port=$("#port").val();
+        var db=$("#db").val();
+        var type=$("#type").val();
+        var key=$("#key").val();
+        var data={
+            ip:ip,
+            port:port,
+            db:db,
+            type:type,
+            key:key
+        };
+
+        $.ajax({
+            type: "post",
+            url: "redis_tools",
+            data: data,
+            success: function(msg){
+               $("#result").text(msg)
+                $("#showbox").alert();
+            }
+        });
+    })
+
+
+</script>
+</html>
